@@ -63,60 +63,60 @@ So let's go to our launchpad application, and open `/apps/launchpad/lib/launchpa
 defmodule Launchpad do
     @behaviour :gen_statem
 
-	defstruct [:socket, :config, max_pool: 5, pool_count: 0, acceptors: %{}]
+    defstruct [:socket, :config, max_pool: 5, pool_count: 0, acceptors: %{}]
    
-	def start_link(opts) do
-		name = Map.get(opts, :name, {:local, __MODULE__})
+    def start_link(opts) do
+        name = Map.get(opts, :name, {:local, __MODULE__})
     
-		:gen_statem.start_link(name, __MODULE__, opts, [])
-	end
+        :gen_statem.start_link(name, __MODULE__, opts, [])
+    end
 
-	@impl true
-  	def callback_mode(), do: :handle_event_function
+    @impl true
+    def callback_mode(), do: :handle_event_function
 
-	@impl true
-	def init(opts) do
-		Process.flag(:trap_exit, true)
+    @impl true
+    def init(opts) do
+        Process.flag(:trap_exit, true)
     
-		port = Map.get(opts, :port, 4000)
+        port = Map.get(opts, :port, 4000)
     
-		{:ok, socket} = :gen_tcp.listen(port, [:binary, {:packet, :raw}, {:active, true}, {:reuseaddr, true}])
+        {:ok, socket} = :gen_tcp.listen(port, [:binary, {:packet, :raw}, {:active, true}, {:reuseaddr, true}])
 
-		data = %__MODULE__{socket: socket, config: opts}
+    data = %__MODULE__{socket: socket, config: opts}
     
-		{:ok, :starting, data, [{:next_event, :internal, :create_listener}]}
-	end
+        {:ok, :starting, data, [{:next_event, :internal, :create_listener}]}
+    end
 
-	@impl true
-	def handle_event(:internal, :create_listener, _state,
-  		%__MODULE__{
-    			socket: socket,
-			config: config,
-			max_pool: max,
-			pool_count: pc,
-			acceptors: acceptors
-		} = data
-	) when pc < max do
+    @impl true
+    def handle_event(:internal, :create_listener, _state,
+        %__MODULE__{
+            socket: socket,
+            config: config,
+            max_pool: max,
+            pool_count: pc,
+            acceptors: acceptors
+        } = data
+    ) when pc < max do
     
-		{:ok, pid} = Satellite.start_link(socket, Map.put(config, :number, pc))
-		n_acceptors = Map.put(acceptors, pid, true)
+        {:ok, pid} = Satellite.start_link(socket, Map.put(config, :number, pc))
+        n_acceptors = Map.put(acceptors, pid, true)
 
-		{:keep_state, %{data | pool_count: pc + 1, acceptors: n_acceptors}, [{:next_event, :internal, :create_listener}]}
-	end
+    {:keep_state, %{data | pool_count: pc + 1, acceptors: n_acceptors}, [{:next_event, :internal, :create_listener}]}
+    end
 
-	def handle_event(:internal, :create_listener, :starting, data), do: {:next_state, :running, data, []}
+    def handle_event(:internal, :create_listener, :starting, data), do: {:next_state, :running, data, []}
 
-	def handle_event(:internal, :create_listener, _state, _data), do: {:keep_state_and_data, []}
+    def handle_event(:internal, :create_listener, _state, _data), do: {:keep_state_and_data, []}
 
-	def handle_event(:info, {:EXIT, pid, _reason}, _, %{pool_count: pc, acceptors: acceptors} = data) when :erlang.is_map_key(pid, acceptors) do
-		{_, n_acceptors} = Map.pop(acceptors, pid)
-		{:keep_state, %{data | pool_count: pc - 1, acceptors: n_acceptors}, [{:next_event, :internal, :create_listener}]}
-	end
+    def handle_event(:info, {:EXIT, pid, _reason}, _, %{pool_count: pc, acceptors: acceptors} = data) when :erlang.is_map_key(pid, acceptors) do
+        {_, n_acceptors} = Map.pop(acceptors, pid)
+        {:keep_state, %{data | pool_count: pc - 1, acceptors: n_acceptors}, [{:next_event, :internal, :create_listener}]}
+    end
 
-	def handle_event(:info, {:EXIT, pid, reason}, _, _data) do
-		IO.puts("Received exit from unknown process #{inspect pid} with reason #{reason}")	
-		{:keep_state_and_data, []}
-	end
+    def handle_event(:info, {:EXIT, pid, reason}, _, _data) do
+        IO.puts("Received exit from unknown process #{inspect pid} with reason #{reason}")	
+        {:keep_state_and_data, []}
+    end
 
 end
 {% endhighlight %}
@@ -376,7 +376,7 @@ First we'll need to define a structure that will hold the parsed information in 
 For the request lets create another module in the satellite app, `apps/satellite/lib/satellite_request.ex` . Open the file and add to it:
 
 
-```
+{% highlight elixir %}
 defmodule Satellite.Request do
 
   defstruct [
@@ -395,7 +395,7 @@ defmodule Satellite.Request do
  ]
   
 end
-```
+{% endhighlight %}
 
 The `:query`, `:headers` and `:params` field are maps, because they're key-value elements. `:path`  and `:host` are defined as lists although the url requested and the host will be strings if we want to dispatch on certain paths, match parts of the path, etc, and the same for the host/domain/port, we will need to decompose it into individual elements in order to do so. The remaining keys will either be booleans or strings/atoms that we will fill as we move through the pipeline.
 
@@ -409,7 +409,7 @@ Now create and open a file at `apps/satellite_shared/lib/satellite_configuration
 
 Place inside it the following:
 
-```
+{% highlight elixir %}
 defmodule Satellite.Configuration do
 
   defstruct [
@@ -424,28 +424,28 @@ defmodule Satellite.Configuration do
  ]
 
 end
-```
+{% endhighlight %}
 
 Now open `apps/launchpad/mix.exs` and replace the `deps` function by:
 
-```
+{% highlight elixir %}
 defp deps do
     [
       {:satellite, in_umbrella: true},
       {:satellite_shared, in_umbrella: true}
     ]
 end
-```
+{% endhighlight %}
 
 Open the `apps/satellite/mix.exs` and replace the `deps` function by:
 
-```
+{% highlight elixir %}
 defp deps do
     [
       {:satellite_shared, in_umbrella: true}
     ]
 end
-```
+{% endhighlight %}
 
 The reason we were able to run previously without specifying these dependencies is because `mix` will compile and load all applications and modules in the umbrella, but if we were to assemble a release, then the compilation would fail, because the dependencies weren't specified.
 
@@ -1217,9 +1217,9 @@ So let's say again we have this module:
 
 {% highlight elixir %}
 defmodule Test.Router do
-	use Satellite.Routing
+    use Satellite.Routing
 
-	route "get", "/some/:path", AnotherModule, :a_function
+    route "get", "/some/:path", AnotherModule, :a_function
 end
 {% endhighlight %}
 
@@ -1230,19 +1230,19 @@ When elixir compiles this particular module with that sample code, what actually
 
 {% highlight elixir %}
 defmodule Test.Router do
-	def route(:get, ["some", path], _, %{params: params} = request) do
-		ctx = %{
-			request | 
-			params:  
-				Enum.reduce([{:path, ast_representation_of_the_var_variable}], params, fn({key, var}, acc) ->
-					Map.put(acc, key, var)
-				end)
-		}
+    def route(:get, ["some", path], _, %{params: params} = request) do
+        ctx = %{
+            request | 
+            params:  
+                Enum.reduce([{:path, ast_representation_of_the_var_variable}], params, fn({key, var}, acc) ->
+                    Map.put(acc, key, var)
+                end)
+            }
 
-		apply(AnotherModule, :a_function, [ctx])
+        apply(AnotherModule, :a_function, [ctx])
 	end
 
-	def route(_, _, _, _ctx), do: Satellite.Response.not_found()
+    def route(_, _, _, _ctx), do: Satellite.Response.not_found()
 end
 {% endhighlight %}
 
@@ -1420,7 +1420,7 @@ defmodule Satellite.Response do
     headers_prep = map_headers(headers)
     {n_body, content_length_prep} = create_length(body)
     
-    <<"HTTP/1.0 ", code_prep::binary, "\n", headers_prep::binary, content_length_prep::binary, "\n", n_body::binary, "\n">>
+    <<"HTTP/1.0 ", code_prep::binary, "\n", headers_prep::binary, content_length_prep::binary, "\n", n_body::binary>>
   end
 
   defp map_headers(headers), do: map_headers(headers, <<>>)
