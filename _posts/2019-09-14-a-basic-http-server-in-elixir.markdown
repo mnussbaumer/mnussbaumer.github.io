@@ -13,6 +13,8 @@ To write down my findings and share them I decided I should write a post on how 
 
 We won't be tackling in this post websockets nor any proper http connection upgrades, http2 and such, that will be hopefully for future posts, but instead we'll see how to create a simple socket acceptor pool, use gen_statems to create a way to run a "pipeline", design a basic router, parse the incoming requests, etc.
 
+You can find the final source code for this at [satellitex repo](https://github.com/mnussbaumer/satellitex) up to the end of the tutorial.
+
 We'll have at least 4 components:
 
 * the socket acceptor pool - creates a number of ready to work socket listeners waiting for requests on a given port
