@@ -82,7 +82,7 @@ defmodule Launchpad do
     
         port = Map.get(opts, :port, 4000)
     
-        {:ok, socket} = :gen_tcp.listen(port, [:binary, {:packet, :raw}, {:active, true}, {:reuseaddr, true}])
+        {:ok, socket} = :gen_tcp.listen(port, [:binary, {:packet, :raw}, {:active, false}, {:reuseaddr, true}])
 
     data = %__MODULE__{socket: socket, config: opts}
     
