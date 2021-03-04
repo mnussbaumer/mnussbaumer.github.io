@@ -1,5 +1,8 @@
+<div class="post-image">
+<img src="{{ site.url }}/assets/images/vming-header-image.jpeg" alt="vm_host_diagram">
+</div>
 
-{: class="section-title" }
+{: class="section-title" style="margin-top: 0;" }
 ##  Intro
 
 
