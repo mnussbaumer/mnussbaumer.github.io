@@ -185,6 +185,7 @@ It will ask you for the sudo password (should be the same as of the account you 
 Once it's finished installing we need to enable the SSH-server so it can listen for connections.
 
 > sudo systemctl enable --now ssh
+
 > sudo systemctl status ssh 
 
 The last command should show you the status of the service as running (you might need to hit the key `q` to exit the view)
