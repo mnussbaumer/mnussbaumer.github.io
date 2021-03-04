@@ -1,0 +1,74 @@
+$color-map: (
+    "highlight": #d14,
+    "light-gray": #bbb,
+    "blockquote-bg": rgba(150, 150, 150, 0.1)
+);
+
+:root {
+    @each $name, $color in $color-map {
+	--#{$name}: #{$color};
+    }
+}
+
+
+.post-title, .section-title {
+    text-transform: uppercase;
+    color: var(--highlight);
+    font-weight: bold;
+    width: inherit;
+    padding: 10px 20px;
+
+    background-color: var(--light-gray);
+    border: 0 solid var(--highlight);
+    border-left: 5px solid var(--highlight);
+}
+
+
+.post-title {
+    text-transform: uppercase;
+    padding: 50px;
+    border-left-width: 0;
+    border-bottom-width: 20px;
+    font-family: sans-serif;
+}
+
+.section-title {
+    margin-top: 50px;
+}
+
+.post-content {
+    text-align: justify;
+
+    blockquote {
+	font-style: normal;
+	font-weight: light;
+	background-color: var(--blockquote-bg);
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-align: left;
+	color: rgb(120, 120, 120);
+	line-height: 1.4rem;
+    }
+
+    hr {
+	margin: 25px 10px;
+	border-radius: 500px;
+	height: 5px;
+	background-color: transparentize(map-get($color-map, "highlight"), 0.9);
+	border: 1px solid var(--highlight);
+    }
+
+
+    ul {
+	background-color: transparentize(map-get($color-map, "light-gray"), 0.9);
+	padding: 20px 20px 20px 40px;
+	margin: 0;
+	border-radius: 8px;
+
+	li {
+	    border-top: 1px solid transparentize(map-get($color-map, "highlight"), 0.9);
+	    margin-top: 10px;
+	    padding-top: 5px;
+	}
+    }
+}
