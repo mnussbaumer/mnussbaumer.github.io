@@ -11,7 +11,7 @@ We're going to use Parallels application for macOS - the simple reason is becaus
 
 Both VirtualBox and VMWare are currently unable to run on M1 but if you're not running on M1 you should be able to do pretty much the same with any of these other products, being VirtualBox box open source and free to download and use.
 
-Although this is for macOS I think it can be helpful no matter what OS you run as your desktop.
+Although this is for macOS I think it can be helpful no matter what OS you run as your desktop. We'll be using Canonical's Desktop Ubuntu, but this guide works just as well with the server distribution.
 
 To lay out what we're going to do:
 - Install Parallels
