@@ -24,6 +24,7 @@ Technologies I'm comfortable with:
 <br>
 PaaS:
 - Heroku
+- Gigalixir
 - Render
 - Scaleway
 
