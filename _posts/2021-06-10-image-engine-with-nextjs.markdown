@@ -1,3 +1,11 @@
+---
+layout: post
+title: "ImageEngine with Next.js"
+canonical_url: "https://dev.to/mnussbaumer/imageengine-with-nextjs-1dh7"
+date: 2021-06-10 16:30:00 +0700
+categories: react js imageengine nextjs
+---
+
 {: class="section-title" style="margin-top: 0;" }
 #### Using ImageEngine in a React.js project
 
