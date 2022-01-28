@@ -1,4 +1,4 @@
-What's wrong with Software a.k.a. Ranting to the wind
+What's wrong with Software Development a.k.a. Ranting to the wind
 ========
 
 As someone who writes code for most of my time, either as my work or in personal projects I find it extremely difficult to understand the lacking of proper written documents describing what should be accomplished and the reluctance in using the written format to discuss and document the development of software.
