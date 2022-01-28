@@ -99,7 +99,7 @@ defmodule User.Action.Type do
 
   def equal?(data_1, data_2) do
     case {cast(data_1), cast(data_2)} do
-      {{:ok, same}, {:ok, same}} -> true
+      {{ '{{' }}:ok, same}, {:ok, same}} -> true
       _ -> false
     end
   end
