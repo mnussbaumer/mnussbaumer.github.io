@@ -6,7 +6,9 @@ date: 2022-01-06 16:30:00 +0700
 categories: elixir ecto enum database type
 ---
 
-Hoje vou mostrar um enumerador implementado como um `Ecto.Type`, que uso em quase todos os projectos de Elixir em que contribuo. É um tipo semelhante ao `Ecto.Enum` que permite utilizar `átomos` na lógica interna da aplicação, validar/transformar valores equivalentes na sua forma de caracteres, e ao mesmo tempo limitar os possíveis valores que determinado campo/coluna pode assumir. Como não há tradução actual para o tipo de "string", no sentido em que é utilizado em programação, irei utilizar o termo `listagramma`, no sentido que uma "string" é uma lista de caracteres, e `gramma` em latim é símbolo/letra/desenho (hexagrama, etc), ou seja, uma lista de "grammas".
+[em inglês](/elixir/ecto/enum/database/type/2022/01/06/creating-an-ecto-enum-type.html)
+
+Hoje vou mostrar um enumerador implementado como um `Ecto.Type`, que uso em quase todos os projectos de Elixir em que contribuo. É um tipo semelhante ao `Ecto.Enum` que permite utilizar `átomos` na lógica interna da aplicação, validar/transformar valores equivalentes na sua forma de caracteres, e ao mesmo tempo limitar os possíveis valores que determinado campo/coluna pode assumir. Como não há tradução actual para o tipo de "string", no sentido em que é utilizado em programação, irei utilizar o termo `listagrama`, no sentido que uma "string" é uma lista de caracteres, e `gramma` em latim é símbolo/letra/desenho (hexagrama, etc), ou seja, uma lista de "grammas".
 
 Apesar do `Ecto` incluir um `Ecto.Enum` desde a versão 3.5, este sofre de alguns problemas:
 - é declarado em conjunto com o esquema no qual é utilizado, o que não permite que seja partilhado facilmente entre esquemas,
@@ -79,7 +81,7 @@ Mas se por exemplo, agora quisessemos utilizar este mesmo tipo que definimos no 
 
 Para além disso, não temos também acesso a funções de validação independentes do esquema. O tipo sendo declarado no esquema em si, é parte do mesmo e as suas validações ocorrem no contexto de um esquema de `Ecto`. Adicionar claúsulas específicas para tratar de casos especiais é também impossível ou bastante mais complicado do que necessita de ser.
 
-Adicionalmente, caso queiramos guardar tais valores como números inteiros ao nível da base de dados, também não o podemos fazer uma vez que o `Ecto.Enum` assume apenas listagrammas (`strings`) como a coluna ao qual está associado.
+Adicionalmente, caso queiramos guardar tais valores como números inteiros ao nível da base de dados, também não o podemos fazer uma vez que o `Ecto.Enum` assume apenas listagramas (`strings`) como a coluna ao qual está associado.
 
 Por último, não gera um `typespec` para o tipo. Caso usemos `dialyzer` na nossa aplicação não temos forma de transpor as restrições definidas no esquema para especificações de tipos para documentação (e consistência de documentação das interfaces).
 
@@ -128,13 +130,13 @@ Analisando o módulo:
 - declaramos que o módulo implementa o comportamento (`@behaviour`) de um `Ecto.Type` (o que nos garante avisos e erros aquando da compilação no caso de nos esquecer-mos de implementar alguma função)
 - declaramos uma função `type/0` que resolve no tipo interno que o módulo representa (o que será utilizado aquando da serialização para a base de dados). Neste caso resolve em `:string` (ou seja, a coluna na base de dados será uma coluna de texto - varchar, char, text, etc)
 - declaramos um `typespec`, que resolve numa lista contendo todos os átomos válidos para este tipo
-- utilizando essa lista de átomos válidos (`@valid_atoms`) geramos uma lista de listagramas que correspondem directamente às respectivas versões dos átomos, assim como dois atributos do módulo para guardar o mapeamento entre os mesmos, átomos->listagrammas e listagrammas->átomos
-- declaramos todas as funções requeridas pelo comportamento `Ecto.Type` - uma vez que temos uma lista compostas por todos os átomos e outra por todos os listagrammas válidos, podemos utilizar essas listas como cláusulas de restrição nas funções requeridas e dessa forma facilmente definir como se devem comportar.
+- utilizando essa lista de átomos válidos (`@valid_atoms`) geramos uma lista de listagramas que correspondem directamente às respectivas versões dos átomos, assim como dois atributos do módulo para guardar o mapeamento entre os mesmos, átomos->listagramas e listagramas->átomos
+- declaramos todas as funções requeridas pelo comportamento `Ecto.Type` - uma vez que temos uma lista compostas por todos os átomos e outra por todos os listagramas válidos, podemos utilizar essas listas como cláusulas de restrição nas funções requeridas e dessa forma facilmente definir como se devem comportar.
 
 
 Como podemos ver, é simples criar um `Ecto.Type` que represente um grupo restrito de valores, ajudando-nos a tornar o nosso código mais assertivo e explícito (e por conseguinte mais compreensível também).
 
-Permite-nos também transformar e validar termos independentemente de um qualquer esquema. Podemos por exemplo executar `User.Action.Type.cast("bid")` para validar o termo `"bid"`, que neste caso seria válido visto ser a representação em letragramma do átomo `:bid`.
+Permite-nos também transformar e validar termos independentemente de um qualquer esquema. Podemos por exemplo executar `User.Action.Type.cast("bid")` para validar o termo `"bid"`, que neste caso seria válido visto ser a representação em listagrama do átomo `:bid`.
 
 Caso copiar ou replicar este módulo com as devidas alterações sempre que necessitemos de um tipo novo para um outro grupo de valores não for um problema, podemos utilizar esta versão e fazer exactamente isso, utilizando isto como a "planta" para todos os outros.
 
@@ -174,7 +176,7 @@ end
 Vejamos então uma lista do que o nosso módulo necessita suportar:
 
 - a macro `__using__`, de forma que os módulos que queiram fazer uso dele, possam utilizar a palavra-chave `use`, como demonstrado nos exemplos do que queremos
-- que seja capaz de distinguir entre listas de átomos como valores válidos e listas de palavras-chaves, de forma a que possa intuitivamente implementar ora versões com base de número inteiro, ou de listagrammas
+- que seja capaz de distinguir entre listas de átomos como valores válidos e listas de palavras-chaves, de forma a que possa intuitivamente implementar ora versões com base de número inteiro, ou de listagramas
 - permitir a quem o deseje implementar a possibilidade de escrever funções adicionais para `cast`/`dump` do comportamento  `Ecto.Type`
 - introduzir automaticamente um `typespec` (especificação de tipo) que reflita todos os valores válidos na sua forma de átomo
 - que emerja erros aquando da compilação quando os valores utilizados na definição do tipo sejam inválidos
@@ -446,11 +448,11 @@ A, também especial, macro `__using__`:
 
 Uma vez que é uma macro, irá ser avaliada aquando da compilação do código. Nela, utilizamos `Keyword.fetch!` para o termo `:values` das opções que forem passadas ao `use`, por exemplo `use TypedEnum, values: [:bid, :request, :upload, :pay]` significa que a variável `opts` será uma lista `Keyword` com uma chave `:values`, cujo valor será uma lista de átomos (`:bid`, `:request`, etc). Uma vez que a chave `:values` é essencial ao funcionamento da macro, caso não esteja presente nas `opts` queremos que surja um erro, e daí utilizarmos `fetch!`.
 
-De seguida decidimos se devemos definir o enumerador com valores de números inteiros ou listagrammas, e fazemo-lo avaliando a forma do valor da chave `:values`. Caso seja uma lista `Keyword` assumimos que seja números inteiros, pois será composta por pares de `versão_átomo -> número_inteiro_correspondente`. Caso seja uma simples lista de átomos, assumimos que o desejado é que o enumerador use listagrammas como formato.
+De seguida decidimos se devemos definir o enumerador com valores de números inteiros ou listagramas, e fazemo-lo avaliando a forma do valor da chave `:values`. Caso seja uma lista `Keyword` assumimos que seja números inteiros, pois será composta por pares de `versão_átomo -> número_inteiro_correspondente`. Caso seja uma simples lista de átomos, assumimos que o desejado é que o enumerador use listagramas como formato.
 
 Dependendo disso fazemos algumas verificações para nos certificarmos que os valores têm o formato correcto. Tudo isto acontece aquando da compilação, logo qualquer erro que haja emergirá nessa altura, o que permite ao utilizador saber imediatamente se há algum problema.
 
-Agora iremos fazer uma leitura do que acontece na versão com base em números inteiros. Visto ser mais complexa que a com base em listagrammas acredito que compreendendo esta será fácil ler a outra. Sendo uma macro que utiliza `quote`, os conteúdos dos blocos de `quote do end` irão ser introduzidos nos módulos que utilizarem esta macro e é o que se passa nesses blocos que é o mais importante.
+Agora iremos fazer uma leitura do que acontece na versão com base em números inteiros. Visto ser mais complexa que a com base em listagramas acredito que compreendendo esta será fácil ler a outra. Sendo uma macro que utiliza `quote`, os conteúdos dos blocos de `quote do end` irão ser introduzidos nos módulos que utilizarem esta macro e é o que se passa nesses blocos que é o mais importante.
 
 
 
@@ -570,24 +572,24 @@ Primeiro incluímos imediatamente o atributo `@before_compile`, que faz com que 
 Dessa lista de `values`, geramos 4 mapas - se utilizarmos o exemplo anterior onde a chave `:values` assumia o valor de uma lista com a seguinte forma `[val_1: 1, val_2: 2]`), o resultado de `atom_integer_map`, `string_integer_map`, `string_atom_map`, `integer_atom_map` será respectivamente:
 
 - mapa com as mesmas chaves e valores que a lista `Keyword`, neste caso: `%{val_1: 1, ...}`
-- outro mapa idêntico mas agora com as chaves em formato de letragramma ao invés de átomos: `%{"val_1" => 1, ...}`
-- um mapa que mapeia as correspondências entre letragrammas e versões em átomos: `%{"val_1" => :val_1, ...}`
+- outro mapa idêntico mas agora com as chaves em formato de listagrama ao invés de átomos: `%{"val_1" => 1, ...}`
+- um mapa que mapeia as correspondências entre listagramas e versões em átomos: `%{"val_1" => :val_1, ...}`
 - por último, as correspondências entre números inteiros e as suas equivalências em formato de átomo, e.g: `%{1 => :val_1, ...}`
 
-Com estes quatro mapas auxiliares será mais fácil resolvermos os valores do tipo dependendo se estamos a fazer uma validação/transformação (`cast/1`) ou uma serialização (`dump/1`), e tendo em conta o formato do termo original (n. inteiro, letragramma ou átomo).
+Com estes quatro mapas auxiliares será mais fácil resolvermos os valores do tipo dependendo se estamos a fazer uma validação/transformação (`cast/1`) ou uma serialização (`dump/1`), e tendo em conta o formato do termo original (n. inteiro, listagrama ou átomo).
 
 De seguida geramos 3 listas adicionais, que nos facilitarão restringir as cláusulas das nossas funções:
 
-- para letragrammas: `["val_1", ...]`
+- para listagramas: `["val_1", ...]`
 - para átomos: `[:val_1, ...]`
 - para números inteiros: `[1, ...]`
 
 
 Colocamos todas estas variáveis auxiliares em atributos do módulo (o que significa que quem esteja a utilizar o mesmo, os pode aceder com a síntaxe usual, `@nome_do_atributo`), e utilizamos a lista de valores válidos nos seus diferentes formatos para providenciar uma função, `values/1`, que resolve em todos os valores válidos para o formato desejado.
 
-As funções `cast` (e no nosso caso `load` também), são usadas para transformar termos do seu formato interno na base de dados, ou externos à nossa aplicação, no formato utilizado pela nossa aplicação, neste caso em átomos. Por conseguinte, se parte do código por algum motivo executar `load/cast` com valores já no formato correcto, a resolução dessas funções resultará no mesmo termo. Se no entanto utilizarmos termos no formato de listagrammas ou números inteiros, se tiverem uma correspondência válida, serão convertidos no seu formato de átomo. Caso sejam inválidos emergirão um erro.
+As funções `cast` (e no nosso caso `load` também), são usadas para transformar termos do seu formato interno na base de dados, ou externos à nossa aplicação, no formato utilizado pela nossa aplicação, neste caso em átomos. Por conseguinte, se parte do código por algum motivo executar `load/cast` com valores já no formato correcto, a resolução dessas funções resultará no mesmo termo. Se no entanto utilizarmos termos no formato de listagramas ou números inteiros, se tiverem uma correspondência válida, serão convertidos no seu formato de átomo. Caso sejam inválidos emergirão um erro.
 
-No caso da função `dump`, a lógica é em tudo semelhante, com a diferença que o formato final que procuramos é o de número inteiro (para serialização na base de dados), neste caso, listagrammas e átomos, se tiverem uma correspondência válida, serão convertidos no seu formato de número inteiro, caso o termo a avaliar seja já um número inteiro e válido, a função resolverá com esse mesmo termo.
+No caso da função `dump`, a lógica é em tudo semelhante, com a diferença que o formato final que procuramos é o de número inteiro (para serialização na base de dados), neste caso, listagramas e átomos, se tiverem uma correspondência válida, serão convertidos no seu formato de número inteiro, caso o termo a avaliar seja já um número inteiro e válido, a função resolverá com esse mesmo termo.
 
 Uma vez que cada função `load/1` e `dump/1` tem a acompanhar um grupo de restrições, caso os valores passados não sejam válidos, as cláusulas que inserimos através do `@before_hook` serão as executadas (uma vez que aceitam qualquer termo e não têm guardas), e resultarão num erro.
 
@@ -613,8 +615,8 @@ Adicionalmente às funções requeridas pelo comportamento `Ecto.Type` eu pessoa
 
 A função `get_term` é simplesmente para facilitar a verificação de equivalência entre termos.
 
-E isto é basicamente tudo o que é necessario. A versão em listagrammas é em todo símile a esta, mas mais simples uma vez que apenas necessita de funcionar com átomos e listagrammas.
+E isto é basicamente tudo o que é necessario. A versão em listagramas é em todo símile a esta, mas mais simples uma vez que apenas necessita de funcionar com átomos e listagramas.
 
-Como última nota relativa ao módulo que escrevemos, optei por manter duas versões separadas para a versão listagramma e outra para a versão de números inteiros - isto porque apesar de haver partes duplicadas entre ambas, escrever apenas uma versão requereria uso de várias condicionais, e penso que o código resultante seria bem mais complicado e não linear de entender. Assim temos um pouco de duplicação mas cada parte trata apenas do que tem a tratar.
+Como última nota relativa ao módulo que escrevemos, optei por manter duas versões separadas para a versão listagrama e outra para a versão de números inteiros - isto porque apesar de haver partes duplicadas entre ambas, escrever apenas uma versão requereria uso de várias condicionais, e penso que o código resultante seria bem mais complicado e não linear de entender. Assim temos um pouco de duplicação mas cada parte trata apenas do que tem a tratar.
 
 E agora que vemos como poderíamos implementar tal módulo para nos auxiliar, caso queiram podem utilizar um pacote já feito, disponível em [hexdocs](https://hexdocs.pm/typed_enum/TypedEnum.html) (ou github [mnussbaumer/typed_enum](https://github.com/mnussbaumer/typed_enum). De qualquer das formas espero que tenha sido útil.

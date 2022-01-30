@@ -6,6 +6,8 @@ date: 2022-01-06 16:30:00 +0700
 categories: elixir ecto enum database type
 ---
 
+[in portuguese](/elixir/ecto/enum/database/type/2022/01/06/criar-um-ecto-type-como-enum.html)
+
 Today I'm going to write about a little Ecto type I use regularly in most Elixir projects I work in. Basically, it's an enum wrapper that allows you to use a limited set of `:atoms` or `"strings"` values in your `Ecto` schemas definitions.
 
 You might be wondering why a writing an enum type when `Ecto` ships with an `Ecto.Enum` type since `v3.5`. The main reason is the typing of the "type" itself and sharing this type between multiple schemas.
