@@ -1,5 +1,10 @@
-Creating an Ecto Enum Type
-========
+---
+layout: post
+title: "Creating an Ecto Enum Type"
+canonical_url: "https://dev.to/mnussbaumer/creating-an-ecto-enum-type-43dh"
+date: 2022-01-06 16:30:00 +0700
+categories: elixir ecto enum database type
+---
 
 Today I'm going to write about a little Ecto type I use regularly in most Elixir projects I work in. Basically, it's an enum wrapper that allows you to use a limited set of `:atoms` or `"strings"` values in your `Ecto` schemas definitions.
 
