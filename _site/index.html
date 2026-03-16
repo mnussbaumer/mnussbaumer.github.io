@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" theme="dark-theme">
+  <head>
+    <meta charset="utf-8">
+    <meta http_equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+      micaelnussbaumer
+    </title>
+    <link rel="icon" href="">
+    <link rel="stylesheet" href="/css/site.css">
+    <script src="/js/site.js"></script>
+    <link rel="icon" type="image/png" href="/images/graphics/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/svg+xml" href="/images/graphics/favicon.svg">
+    <link rel="shortcut icon" href="/images/graphics/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/graphics/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-title" content="mnussbaumer">
+    <link rel="manifest" href="/images/graphics/site.webmanifest">
+  </head>
+
+  <body>
+    <header>
+      <ul>
+        <li><a href="/pages/blog">blog</a></li>
+        <li><a href="/pages/about">about</a></li>
+        <li><a href="https://github.com/mnussbaumer" target="_blank">github</a></li>
+        <li>
+          <button type="button" id="theme-toggle" data-current="dark-theme">light</button>
+        </li>
+        <li class="odot">&odot;</li>
+        <li><a href="/">micaelnussbaumer</a></li>
+      </ul>
+    </header>
+    <main>
+      <div id="content">
+        <p class="pre-intro">
+  My personal website and blog, where you can find some information about me and where I post articles in the form of tutorials/concept explanations and explore different ideas related mostly with computer programming.
+</p>
+<br>
+<p>
+  It's built with <a href="https://github.com/elixir-tools/tableau" target="_blank">Tableau</a>. All articles previous to 2026 are either from the previous blog hosted at this same address, or from medium.com, dev.to, but I'm using the opportunity to bring the articles from my other profiles into the same place.
+</p>
+<br>
+<hr class="hr-separator-b">
+<ol class="blog-posts-list">
+  
+    <li>
+      <span class="date">2022-01-06</span>
+      <a href="/posts/creating-an-ecto-enum-type">Creating an Ecto Enum Type</a>
+    </li>
+  
+    <li>
+      <span class="date">2022-01-06</span>
+      <a href="/posts/criar-um-ecto-type-como-enum">Criar um Ecto.Type como Enum</a>
+    </li>
+  
+    <li>
+      <span class="date">2021-11-16</span>
+      <a href="/posts/what-s-wrong-with-software-development">What&#39;s wrong with Software Development</a>
+    </li>
+  
+    <li>
+      <span class="date">2021-06-10</span>
+      <a href="/posts/imageengine-w-nextjs">ImageEngine with Next.js</a>
+    </li>
+  
+    <li>
+      <span class="date">2019-09-14</span>
+      <a href="/posts/writing-a-html-server-in-elixir/">Writing the basis of an HTML Server with Elixir</a>
+    </li>
+  
+    <li>
+      <span class="date">2019-05-11</span>
+      <a href="/posts/pattern-matching-in-elixir">Pattern Matching in Elixir - Does it fit?</a>
+    </li>
+  
+    <li>
+      <span class="date">2017-06-08</span>
+      <a href="/meditation-without-mambojambo/">Meditation Without Mambojambo</a>
+    </li>
+  
+</ol>
+      </div>
+      <div id="sidebar">
+        
+          <p class="since">blog</p>
+          <ol class="blog-posts-list">
+            
+              <li>
+                <span class="date">2022-01-06</span>
+                <a href="/posts/creating-an-ecto-enum-type">Creating an Ecto Enum Type</a>
+              </li>
+            
+              <li>
+                <span class="date">2022-01-06</span>
+                <a href="/posts/criar-um-ecto-type-como-enum">Criar um Ecto.Type como Enum</a>
+              </li>
+            
+              <li>
+                <span class="date">2021-11-16</span>
+                <a href="/posts/what-s-wrong-with-software-development">What&#39;s wrong with Software Development</a>
+              </li>
+            
+          </ol>
+        
+        <img class="sidebar-logo" src="/images/graphics/circled-dot.webp">
+      </div>
+    </main>
+  </body>
+
+  
+    <script>
+  function log(message) {
+    if (true) {
+      console.log(`[web_dev_utils] ${message}`)
+    }
+  }
+  function connect() {
+    try {
+      window.socket = new WebSocket('ws://' + location.host + '/ws');
+
+      window.socket.onmessage = function(e) {
+        if (e.data === "reload") {
+          log("reloading!");
+          location.reload();
+        } else if (e.data === "subscribed") {
+          log("connected and subscribed!");
+        }
+      }
+
+      window.socket.onopen = () => {
+        waitForConnection(() => {
+          log("sending 'subscribe' message");
+          window.socket.send("subscribe")
+        }
+        , 300);
+      };
+
+      window.socket.onclose = () => {
+        setTimeout(() => connect(), 500);
+      };
+
+      function waitForConnection(callback, interval) {
+        log("waiting for connection!")
+        if (window.socket.readyState === 1) {
+          callback();
+        } else {
+          log("setting a timeout")
+          setTimeout(() => waitForConnection(callback, interval), interval);
+        }
+      }
+    } catch (e) {
+      log(e);
+      setTimeout(() => connect(), 500);
+    }
+  }
+
+  log("about to connect");
+  connect();
+</script>
+
+  
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" theme="dark-theme">
+  <head>
+    <meta charset="utf-8">
+    <meta http_equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+      What&#39;s wrong with Software Development | micaelnussbaumer
+    </title>
+    <link rel="icon" href="">
+    <link rel="stylesheet" href="/css/site.css">
+    <script src="/js/site.js"></script>
+    <link rel="icon" type="image/png" href="/images/graphics/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/svg+xml" href="/images/graphics/favicon.svg">
+    <link rel="shortcut icon" href="/images/graphics/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/graphics/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-title" content="mnussbaumer">
+    <link rel="manifest" href="/images/graphics/site.webmanifest">
+  </head>
+
+  <body>
+    <header>
+      <ul>
+        <li><a href="/pages/blog">blog</a></li>
+        <li><a href="/pages/about">about</a></li>
+        <li><a href="https://github.com/mnussbaumer" target="_blank">github</a></li>
+        <li>
+          <button type="button" id="theme-toggle" data-current="dark-theme">light</button>
+        </li>
+        <li class="odot">&odot;</li>
+        <li><a href="/">micaelnussbaumer</a></li>
+      </ul>
+    </header>
+    <main>
+      <div id="content">
+        <div class="blog-post-header">
+  <h1 class="post-title">What&#39;s wrong with Software Development</h1>
+  <p class="post-date">
+    16, Nov 2021 / <span class="post-author">micael nussbaumer</span>
+  </p>
+</div>
+<div class="blog-post-content">
+  <p><span class="since">(Addendum 2026-03-14:</span> This was written before the current AI cycle but funnily, it seems, most of these things turned out, or are turning out, to be also important for Agentic coding, which is kinda poetic...<span class="since">)</span></p>
+<hr class="hr-separator-b">
+<p>As someone who writes code for most of my time, either as my work or in personal projects I find it extremely difficult to understand the lacking of proper written documents describing what should be accomplished and the reluctance in using the written format to discuss and <code>document the development of software</code>.</p>
+<p>First let's go through what I called <code>&quot;written documents&quot;</code>. There are different forms these can assume, in common they have that they specify to varying degrees of detail, technicality, and/or context the purpose, specifications, and requirements of a given piece of <code>&quot;software idea&quot;</code>.</p>
+<p>I call it <code>&quot;software idea&quot;</code>, because that's what most things are until they're fully materialized as <code>&quot;working software&quot;</code>.</p>
+<p>Some of the more common documents (or artefacts) that concern this are:</p>
+<ul>
+  <li class="reg-li">- Written Specifications:</li>
+  <li class="sub-li">Document(s) detailing, usually with high attention to technical capabilities, restrictions or requirements, in an unambiguous language, the working of an intended software program</li>
+  <li class="reg-li">- User Stories:</li>
+  <li class="sub-li">Written documents detailing at a high level the intended functionality of a software program/capability, from the point of view of a user of the software interfaces</li>
+  <li class="reg-li">- Design Documents:</li>
+  <li class="sub-li">- Visual document, either in the form of diagrams, and/or actual illustrations of the intended software</li>
+</ul>
+<p>There's probably more ways, or specific terms to specify what a system, functionality, or capability is to achieve, both in itself or when in bigger existing system (when it's not self-contained) but these cover most of the &quot;ideas&quot;.</p>
+<p>I don't expect everybody (including myself) to master all these forms of laying out projects, in all contexts and all situations. If I'm working with someone who <code>is not</code> a software developer and just wants a website that does X, I know for sure I will have to weight in my own knowledge, and do extra work to get into the details of what is wanted and access its feasibility. It's normal in these cases to have to go from simple <code>user stories</code>, and it's expected that you as the developer will take care of the technicalities related to implementing them.</p>
+<p>If I'm working through a <code>Project Manager (PM)</code> then my expectations change a little bit. I'm no longer working with someone that simply wants an idea converted into software, but instead someone that, as the title implies, is responsible for managing a project, and as such I expect them to have both technical knowledge and to dedicate part of their time producing more relevant and accurate documents detailing what is to be implemented. Again, it's not reasonable to expect that a <code>PM</code> will know in all details both the underlying technology and any and all roadblocks, but it's normal to expect a well rounded specification and at least some understanding of the system, languages and platforms in use. This last part is relevant and I'll touch on it later on.</p>
+<hr class="hr-separator-b">
+<p>We'll focus more on the software being developed with a <code>PM</code>, since the other cases are in themselves a bit off-target when discussing the need for documentation and written artefacts besides the code. Most projects, even small ones, will usually have a <code>PM</code> that is in charge of overseeing the implementation of whatever is to be built.</p>
+<p>Let me start by prefacing that I understand that a <code>PM</code> has a non trivial amount of things to worry about - managing bikeshedding, going through discussions full of cruft, making sure development is aligned with upper goals, making sure it's on track, solving issues, allocating resources and making technical decisions. Let me also add, that although I don't claim that I would do their work better than they do, their work is their work and not mine.
+If I was to be hired or paid to both oversee and develop (i.e. code), then my compensation needs to take that into account and in case it does, I will be more than happy to take on additional responsibilities. If on the other hand my compensation doesn't have equity and is priced at a time unit, then I don't think it's reasonable to expect me to take on additionaly responsibility that someone else is being paid to be responsible for. As with software, good separation of concerns is important. I will do my best nonetheless, but if your advice, suggestions and observations are continuously ignored irrespective of their value (either immediate or solving a problem that manifests itself later on) at some point you just don't do that anymore.</p>
+<p>The same if after careful consideration, and even spending <code>&quot;non-billable&quot;</code> time on a problem, your work is rejected and replaced with some dim-wit solution that <code>&quot;is simpler&quot;</code>, and discards all the knowledge you had gathered while solving it (here I'm not saying in the sense of being attached to the code you write, there's certainly cases where you come up with a solution that is more complex than it needs to be and it's welcomed in that case that a <code>PM or team mate rejects it</code>, it's part of their work and part of being in a team, I'm refering to ditching something for something else that has problems from the get-go, not only imaginary future problems).</p>
+<p>So it's in this situation, working with a <code>PM</code>, that the reluctance in requiring and expecting written artefacts to be produced becomes interesting.
+In a way I would expect, and if I work as a <code>PM</code> would require, that documentation (discussions, specifications, guides, how-to's related to the project, etc) AND tests are something fundamental. As a <code>PM</code> I can't think of any other way of keeping up with how everything works, how everything is <code>SUPPOSED</code> to work, and how we got into this given place.</p>
+<p>People insist on doing video/call based meetings where the &quot;team&quot; catches up and courses of action are decided. This is ok to do, and there might be a need to even have these outside of pure business/development concerns (as team building rituals not concerned with specific work related issues) but it can't replace written documentation.</p>
+<p>Folks whine about tacit knowledge but then don't take any action to solve it which, guess what, can only be solved with written documentation.
+People will prefer re-writing a completely correctly implemented solutions, with all the costs that entails, because there's no one that knows how it works.
+PM's end up having no frigging clue of how the project they're managing works, is tied (or glued) together, all because they can't be bothered to go through more than 1 paragraph of text.</p>
+<hr class="hr-separator-b">
+<p>Here I will add, that developers are some times actively part of the problem as well. The <code>PM's</code> work is nonetheless making sure this is taken care of, not making it normal though. We can put in the list of developer-made problems, the unwillingness to learn specifics outside their area of comfort. Examples can be something that is written in a language that they don't have as much familiarity with. You sometimes see perfectly valid, tested, extensible code, be replaced by orders of magnitude more complexity, untested, brittle layers, just for the sake of sidestepping having to learn how something is being accomplished with much less. No documentation, no testing, no how-to's for getting pieces of a system working, etc. Although these are all problems a developer contributes too, the role of the <code>PM</code> should be to make sure these things are required and properly budgeted. At least for me, it's fairly easier to document something as I'm writing it as opposed to after the fact.</p>
+<p>This lack of <code>written documentation</code> (or performative documentation, such as tests - in the sense that it performs work to assert the validity of its contents) then exacerbates the issues with keeping up with how things work, if they should be working, and having a complete view of a system. On top of that, it makes <code>on-boarding</code> fairly more difficult as one can't for the most part just go on <code>&quot;discoverability&quot;</code> mode and instead has to rely on lower level code to gather what the <code>&quot;systems&quot;</code> should be doing. It's also fairly more difficult to access if a system is complex because of the domain it covers or if because it's being wrongly thought about.</p>
+<p>Things such as <code>refactoring</code> become a <code>painful</code> chore, because, why would you try to refactor something when you don't even have a baseline of expected functionality asserted? Or at least something explaining what that functionality is expected to do?
+So if it's not product breaking it just gets pushed to the <code>&quot;backlog&quot;</code> void. If it's product breaking then all the required (like, big picture at least) tests to make sure the refactoring conforms have to be written - probably by someone who didn't write the initial implementation, doesn't have all the context, nor knows many of the pitfalls encountered during development because, you guessed it, there's no documentation.</p>
+<p>Then, when the backlog void threatens to suck up the whole thing, the solution is to re-write. On top of this you might also have developers just deciding to quit or unable to have any semblance of productivity.</p>
+<p>So when people go about how they don't have budget for documentation, testing, to put effort into making your software understandable what they're actually saying is they don't care at all for the costs of developing software. Sometimes this makes sense, again, if it's a online freelancing gig for a test-the-waters website, sure, go ahead - it might not even work so those costs would all be extra. But even in those situations, if the software is expected to have some modicum of complexity, tests and documentation will inevitably pay themselves in anything running for more than 2 months, or when you have to have another developer picking up from the existing work.</p>
+<hr class="hr-separator-b">
+<p>What is really mind-boggling is that having documentation and written word as first-class artefacts in a project as the baseline helps beyond these directly related issues already mentioned.</p>
+<p>Jobs will have descriptions such as &quot;employee budget for improvement/knowledge material/courses&quot;, &quot;attending conferences&quot;, etc. But just writing proper documents that are to be used by people of varying technical literacy is a valuable skill. No-one is expected to do all things required for software development super-well, but this is probably one of those things that translates into any field of work, any language stack, any problem domain.</p>
+<p><span class="since">(Addendum 2026-03-14:</span> This is one of the things that seem to be very important for Agentic coding...<span class="since">)</span></p>
+<p>Then you'll see companies hiring for remote positions, but <code>they can't produce any written documents, or specifications</code>. In terms of hiring I also think that this is something that can be greatly improved by having a culture of written first. If your processes, your software, your systems, are documented, it's fairly more easy to:</p>
+<ul>
+  <li class="sub-li"><span class="since">Produce a specification</span> for interview takeaway problems (either new, or using something already implemented, in that case if you have tests then you can automatically measure the functionality of the returned solutions and then look into subjective aspects such as code organisation and others) - this is enabled because it's normal to specify things, and so it's easier to generate a new one because PMs, software engineers `(?!)`, and others have at least some experience doing it;</li>
+  <li class="sub-li"><span class="since">Communicate effectively asynchronously</span> - if your company can't produce written documentation, can't communicate clearly through written form, how am I supposed to believe somehow you are able to foster a remote environment that has any semblance of working?</li>
+  <li class="sub-li"><span class="since">Onboard new people</span> - yes, nothing replaces being able to talk directly to a person and have a question answered on the spot - the issue is that given the complexity of software systems, there is a lot of groundwork that needs to be done when coming up to speed - if the answers for 70% of it are written and discoverable, it's better than 0% and 100% of the questions needing some person to answer them, or having to figure them out by backtracking through actual code, instead of clearer high-level descriptions;</li>
+  <li class="sub-li"><span class="since">Inter/intra team communication</span> - if nothing is written, again the overhead of sharing knowledge is extremely high - some people will also be reluctant to engage if the other person doesn't show that at least they tried understanding something first - written documents can help this as well, since someone can do their own research and be left only with questions related to details - or not have questions afterall - it also shows how the documentation might be improved or is somehow missing so effective documentation improvements can be fed into these loops;</li>
+  <li class="sub-li">Lastly, and this is perhaps personal, I think it's also a proxy for team fit - not a fit into a particular team, but fit into the idea of being in a team - people who take care in explaining how things work in order to be grokkable by others seem to me more inclined to care less about politics and not of being in a position just to take a payment at the end of the month/sprint - basically because by making their work accessible to others they're removing the need to rely on their tacit knowledge.</li>
+</ul>
+<hr class="hr-separator-b">
+<p>This is why to me it's a bit mind-boggling that it's not a core part of software development team processes. It's not only for developers, it's for <code>PMs</code> too and other members. It's not only about <code>facilitating knowledge sharing</code> and <code>reducing bus factor</code>, it's also about <code>improving skills</code> that are useful in a wide range of fields <code>beyond software development</code> (the ability to express ideas in the written form - because that scales). It's not only about empowering developers but about steering product development to a model where things are based more on their merits than on who has the most clout, political or personal, or who is the smartest-talking ape. It's also funny that people eagerly will copy tech-stacks and easy to do rituals (like stand-ups, daily calls, etc) from successful companies, but then the things that are far-reaching, such as emphasis on written documentation/preparation/spec'ing, are just ignored, probably because you can't just tick an item off a list and have to actually produce usable artefacts.</p>
+<p>So the take-away I want to leave you with is; <code>if you want to improve the quality of software that you or your team is producing, you want to empower and make a more resilient team, and diminish the long-term cost of software - start by documenting, spec'ing, testing and making this part of the normal expected workflow</code>.</p>
+<p>Most software <code>might start trivial</code>, or start as different services trivilly glued together, but <code>complexity grows exponentially as it develops</code> - not only because it has to take care of much more use cases as it expands, but because it usually has to rely on an increasing number of moving parts, from infrastructure, to packages, libraries, different languages, deployment targets, requirements and constraints and the costs of lacking &quot;written artefacts&quot; remain hidden. A developer that quits because everything is an ungrokkable mess doesn't show up as a direct cost of this. A developer having their productivity hampered in half doesn't show up as this. The need for a re-write because no one understands the system anymore doesn't show up as a cost of this. A new-hire having to spend valuable time from other more knowledgeable developers, that could easily be documented, doesn't show as related to this. Your PMs making wrong decisions doesn't either.</p>
+<p>In the end, most of this is related to two things:</p>
+<ul>
+  <li class="sub-li">the lack of willingness to admit that the written part of software development is essential - which shouldn't be a suprise since what we do as developers is writing code, sometimes comments, and we all know that the difficult part is clarifying the logic of what something should do and not the syntax specifics of given languages;</li>
+  <li class="sub-li">the build to be acquired mentality - it doesn't matter if it's a turd, as long as you can make it look nice on numbers - many endeavours in software seem to only have the goal of being sold - and when that is the case, effectively, these might be additional costs and just feature after feature in a checklist, even if the base is a steeming pile, make it look more palatable - the truth is, it can also sink these ones, there's a breaking point after which you might not be able to have functioning systems and produce new features, and no matter how you sell it, it will show.</li>
+<hr class="hr-separator-b">
+<p>(of course, as with everything, there needs to be a balance, the same way you don't need to test everything that is in your code base to have a good degree of confidence, you might only test the overall code &quot;paths&quot; in some end-to-end fashion, and then specific functionality isolatedly, some things are self documenting, but I would arguee that many, surprisingly, are not, for anyone else than the one writing them - and that has a time validity as well, just like yogurt, after which they too, no longer understand their <code>&quot;clear self-documenting code&quot;</code>)</p>
+</div>
+      </div>
+      <div id="sidebar">
+        
+          <p class="since">blog</p>
+          <ol class="blog-posts-list">
+            
+              <li>
+                <span class="date">2022-01-06</span>
+                <a href="/posts/creating-an-ecto-enum-type">Creating an Ecto Enum Type</a>
+              </li>
+            
+              <li>
+                <span class="date">2022-01-06</span>
+                <a href="/posts/criar-um-ecto-type-como-enum">Criar um Ecto.Type como Enum</a>
+              </li>
+            
+              <li>
+                <span class="date">2021-11-16</span>
+                <a href="/posts/what-s-wrong-with-software-development">What&#39;s wrong with Software Development</a>
+              </li>
+            
+          </ol>
+        
+        <img class="sidebar-logo" src="/images/graphics/circled-dot.webp">
+      </div>
+    </main>
+  </body>
+
+  
+    <script>
+  function log(message) {
+    if (true) {
+      console.log(`[web_dev_utils] ${message}`)
+    }
+  }
+  function connect() {
+    try {
+      window.socket = new WebSocket('ws://' + location.host + '/ws');
+
+      window.socket.onmessage = function(e) {
+        if (e.data === "reload") {
+          log("reloading!");
+          location.reload();
+        } else if (e.data === "subscribed") {
+          log("connected and subscribed!");
+        }
+      }
+
+      window.socket.onopen = () => {
+        waitForConnection(() => {
+          log("sending 'subscribe' message");
+          window.socket.send("subscribe")
+        }
+        , 300);
+      };
+
+      window.socket.onclose = () => {
+        setTimeout(() => connect(), 500);
+      };
+
+      function waitForConnection(callback, interval) {
+        log("waiting for connection!")
+        if (window.socket.readyState === 1) {
+          callback();
+        } else {
+          log("setting a timeout")
+          setTimeout(() => waitForConnection(callback, interval), interval);
+        }
+      }
+    } catch (e) {
+      log(e);
+      setTimeout(() => connect(), 500);
+    }
+  }
+
+  log("about to connect");
+  connect();
+</script>
+
+  
+</html>
