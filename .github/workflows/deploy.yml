@@ -43,6 +43,12 @@ jobs:
       - name: Build site
         run: MIX_ENV=prod mix build
 
+      - name: Create CNAME
+        run: |
+          touch CNAME
+          echo "micaelnussbaumer.com"
+          mv CNAME ./_site/CNAME
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
