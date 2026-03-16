@@ -1,0 +1,105 @@
+---
+author: micael nussbaumer
+date: 2017-06-08 00:00:00
+layout: Micaelnussbaumer.PostLayout
+slug: meditation-without-mambojambo
+title: "Meditation Without Mambojambo"
+categories:
+- meditation
+- thoughts
+permalink: /:title/
+---
+
+I also don't like much of the mambojambo that goes around many of the nowadays trends, but I'm an advocate of meditation. I'm going to try to explain why meditation is valuable in a plausible manner, without metaphysical properties.
+
+I don't derive income on the topic, nor anything related - although I don't think there's a problem with selling your knowledge regarding this if you're doing it correctly and helping other people.
+
+Even though I'm going to argue for analytical reasons, you should notice that most traditions aim to realise the "Truth" and answering the most fundamental questions of our existence and reality and in those realms that are highly spiritual we don't have, luckily or unluckily, a scientific language, so terms are used loosely (or everybody has their own definition so globally they become loosely defined, although in each one's definition they're very concise) to describe many things, sometimes not correctly. I'm also not going to argue for its "health" benefits, because sincerely, if you only care about health go to the gym.
+
+Now bear with me, and you might find something worth taking your time thinking about.
+
+How do you come to have the mind you have today?
+
+By "mind" I mean what seats underneath your skin and from which you as a person sprout? Through your words, modes of being, actions, choices, options. This thing that controls these things, is what I'm calling "mind" here.
+
+As your brain developed, even in the womb of your mother, it started being shaped. Experiences, nervous stimuli and others, experienced by your mother, are received as inputs and help structure your neuronal network and nervous system, even before you're out in the world. Which is nothing short than awe-inspiring by itself.
+
+Later, already on the outside, the inputs you keep receiving (even those received in a time when you can't create memories out of them), "print" certain neuronal structures in your brain.
+
+As you grow up, these structures are either re-enforced or not stimulated, and that makes them either grow bigger roots in your mind or wither away, pretty much like a tree in regards to being watered or not. Besides that, new structures get printed, or to say it more poetically a tree of neurons starts growing, with branches, leaves and all sorts of tree like things.
+
+Now lets make a stop to consider what is a thought. So say for instance, you're afraid of dogs because when you were a child, you were bitten by one (I know it's a cliché, but exercise a bit of suspension of disbelief). This traumatic event created a structure in your mind right?
+
+It printed some sensorial information, like a dog shaped thing, maybe the barking sound, maybe smell, maybe many other variables that were involved at the moment of the happening. You didn't specifically record "that" dog, because we humans don't do that, instead you recorded "inputs" that correlated to that experience but, since we humans also have language, you can symbolise these "inputs" and call them "dog".
+
+Any experience creates or organizes neurones in a certain pattern that reflect the experience, in the brain. So when faced with something that fires up one of the neurones (or many) linked to this experience, it creates a certain pattern of reaction in your mind, that trickles down from your mind, to your body, in the form of salivation, an alert, a flight or fight response, a panic attack, a smile, a burst of joy, god knows what. In the case you're scared of dogs, when you see or sense a dog you'll react accordingly.
+
+This is also known as "classical conditioning" and the most famous example is probably the work of Pavlov, where by serving food to his dogs coupled with a non-related input (the sound of a bell, or a metronome) and repeating this action for a few times he got his dogs to salivate just by reproducing the sound, even when no food was being given. Why? Probably because the repetition created a pattern in the dog's brain, where the sound and the idea of food where interconnected so, when the sound was heard, it triggered the same reaction (salivation) as when food was given.
+
+You see, a thought is nothing in itself, it's an arbitrary arrangement of neurones that encapsulate something external to our minds, in a way that we can relate to it and "think" it or "experience" it. It can also trigger other patterns and groups of neurones and make them fire.
+
+Usually in our lives these "thoughts", or patterns of neurones, are fired in specific situations. You can become "aware" of them, say for instance the dog situation but, in many others that aren't as clear as that, you might not.
+
+In the case of the dog some people will say that, to overcome this irrational fear, you should try to spend some time with dogs that aren't aggressive. By doing this you are probably simply replacing by repetition a certain structure of neurones by another one. If you do it several times, when you face a dog instead of the experience activating the old traumatic events, it will activate these new made structures, that you created by spending time with them. So the "input" of an "object" that has the characteristics of a dog in your mind no longer fires the neurones, or the pattern of neurones, that would trickle a fight or flight response previously.
+
+So this is cool right? It kinda means that you have the power to shape part of your reactions - you could even call it, the power to hack your own mind.
+
+Now, like I said, most of our thoughts and reactions occur in specific situations but we aren't always aware of what actually triggers them. Some times because we are ourselves experiencing the situation, others because it's not always obvious to us, and yet others because we simply don't have the time to go through the sequence of experience in a detached manner (or we may not even be able to).
+
+This is where meditation fits in.
+
+When you start meditating, what gets fired in your head is at the "surface" of your conscious mind (you see, how can we talk scientifically about this shit really? surface of the mind? is that even a thing…).
+
+Because you haven't trained your mind yet to have an anchor, all the electrical impulses firing through your beautiful scalp trigger all sorts of day-to-day thoughts that are in your mind and, if you're anything like other people, you can probably see that the thoughts towards which you're drifting are related to recent events or forth-coming events.
+
+Once you begin to get a hold on how to re-focus your mind from this so said "superficial" thoughts, you begin to go a bit deeper in the machinations of your mind. But to be able to re-focus and sustain focus outside of the thought web you'll first need to practice. Sometimes it will seem pointless but I can assure you, as an over-thinker, that you'll eventually manage it, as long as you keep sitting in silence regularly.
+
+At this level, it's a bit more subtle. Thoughts arise from random impulses in your mind. Where do thoughts come from when you have no external stimuli for them?
+
+I would say that since your mind is always operating, what starts happening is that what gets fired inside your brain - I mean the patterns of neurones that get fired - are the patterns that are more "vividly" printed in your brain. (and they can be vivid both by intensity and intensity together with recent timing, the last usually fading away as time moves forward, since they stop being recent - like if yesterday you had something important on your mind it might pop up but after a week, or even next day if it's no longer relevant, it probably won't pop up again)
+
+It makes sense no?
+
+It's like you have a room full of air and an inflammable gas floating in it as well, in a relevant quantity. If you light a lighter in there - BAM! - it ignites some particles near the lighter and they follow the thread of the gas igniting it as it goes right?
+
+If you don't have any inflammable gas, or not in a relevant quantity, you can light the lighter as many times as you want, that still, nothing will happen.
+
+This is similar to what happens with thoughts in "our mind". If you didn't have patterns of neurones more predisposed to be fired, when you sit still and after you master focusing on an "anchor" (breathing, mantra, or others), there should not be any thought arising right? But they do. And the most funny thing is they do arise besides not having any "situation" firing them. Right? There's no external lighter. So what is making them fire?
+
+Think about this, when you're meditating, and you have gathered a certain amount of experience in doing it, you're able to see thoughts for what they are. Since you have practiced for a bit this you're, actually, able to look at them in very interesting ways. Since your mind is now used to the silence, you can perceive things such as the emotional charge thoughts have, you can see them "rise" from the unconscious to the "surface" of your mind. You can also see what they "fire" as they rise.
+
+We use trauma mostly to talk about something that is "bad". But a trauma is something that leaves a mark. If you were nurtured in good measure, that's a trauma too, it just has good repercussions. The thing is, everything is up until a certain age traumatic - in this sense that it leaves a mark.
+
+If you then add the fact that many of the behaviours and thought patterns we have that make up our own "minds" are made when we don't have any tools to realise we are shaping our minds, or in other words, programming them, we could come to the conclusion that what you think is you is not actually you, or what you think are your original thoughts aren't actually your own thoughts, but the result of repeated inputs. If you then add to it the continuous flux of information to which we subject our minds in our current contemporary societies - even from a very young age, that incessantly "print" inside our minds these structures of thought - the more meditating becomes an important practice.
+
+Have you ever thought why Advertising in prime time was (and still is) so expensive? And why advertisements pass repeated times at the same time frames? Because repetition will print in your brain interconnected sequences of neurones, like a product with a kind of emotion or feeling. Does that ad have a semi-clad girl? Or a happy family? Or the hint of adventure? Well these things are powerful triggers and, when repeated several times, they will print directly in your mind certain structures in certain patterns.
+
+You might find yourself salivating unconsciously for a product that's totally unrelated to the emotion you're experiencing, just like Pavlov's dogs salivated for the sound of a bell (or a metronome).
+
+By meditating you're actually giving yourself a tool to go through this. Literally, instead of having only external "lighters" to trigger your thought patterns you're giving yourself a "lighter" that will trigger whatever are the most "rooted" neurone meshes in your brain (you might think of it in terms of path of least resistance - since all neurones are fired by electrical impulses the ones that have a bigger hold in your brain or more ramifications will undoubtedly fire more easily).
+
+A tool that also allows you to distance yourself from the "thought" objects that were "printed" in your brain. Because they're just "thought" objects.
+
+Your mind can be seen as a store warehouse for "thought-objects" that replicate certain aspects of the external reality, apprehended through your life through your sense organs. This doesn't mean reality doesn't exist, it means that what you have inside your mind is not reality, although in many situations it will be as close to and useful almost as if it were literally bits of reality.
+
+Say for instance you have a child, or something that you really love, when you think of it it probably triggers emotional responses and emotional patterns right? It's not that the object itself carries these emotions or patterns, it's because in your mind the object triggers these other things so, for you, this object is emotionally charged and both are the same. And you can confirm this. Take the object of your love to somebody who is totally unrelated to you and it and just watch them have the blandest of reactions, right? If the object carried these emotions, for instance your baby, then whenever another person entered in contact with him, he would experience the same feelings as you. But that doesn't quite happen right? If your baby starts crying you'll probably be worried and afflicted, but other people in the room will just go - wtf, just shut up that annoying brat.
+
+Once you understand this - and the empiric experience of this is much stronger than the theoretical understanding of it - you're in a way a bit freer to choose things in life, I guess, and to understand yourself.
+
+By exposing these thoughts and the subtle ramifications of the patterns that inhibit or trigger them you get more comfortable with them and, by repeating this process of sitting still and letting your mind unfold, you start to be able to, not control them but, be less controlled by them.
+
+Because even though usually it's useful that the thought objects mimic reality to the point they create a reaction in you some times this may not be as good.
+
+It's good that you're able to discern from an immediate threat, or pick up signals in a conversation that tell you something, it's good that a person you love triggers all the loveable patterns of emotion you have - otherwise you would be a robot - but at the same time, it's not good that some things trigger responses that you wish you wouldn't have - because this too is similar to a robot like experience.
+
+In this sense by practicing you go through several stages, every time you re-focus your mind you're doing a mental pushup.
+
+Some people will also be confronted with some thought structures and patterns they weren't aware of and that may increase some seemingly negative responses. Understanding and acceptance aren't always painless, but not facing that which brings you pain or sorrow will not help you.
+
+Some times it's abstract, some times these patterns of thought are so deeply rooted that they can't be symbolised by language or idea, they just are.
+
+You take a step towards freedom every time you overcome and understand these responses. And then you keep on repeating. Once you start clearing this, you start to settle more often in a specific electrifying state of restful awareness, where less and less you fire these patterns and you're just experiencing the "lighter" going on, maybe what some people call the divine spark? (just kidding…).
+
+The things is, you should try it for yourself and you should stick with it. If you see a guy all pumped up from gym telling you you can do the same, obviously you're not expecting you'll achieve the same results by going to the gym for a month. You need to keep doing it right? I mean, you understand that right?
+
+And so is the mind. It's repetition, either of inputs or behaviours, that shape what we are (along of course with nature), and by giving yourself time for them to unfold you're equipping yourself with a better knowledge of "who" you are. It also touches several aspects of creativity. Creativity is sort of the ability of coming up with new ways of organising or using things. If your mind is held in the sway of certain patterns of thinking it becomes very difficult for it to come up with new ways of organising information, whatever this information is, sound, painting materials, programming languages, tools, whatever.
