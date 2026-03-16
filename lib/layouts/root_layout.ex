@@ -49,7 +49,7 @@ defmodule Micaelnussbaumer.RootLayout do
             <%= if Map.get(@page, :sidebar) do %>
               {@page.sidebar}
             <% else %>
-              <p class="since">blog</p>
+              <a class="since" href="/pages/blog">blog</a>
               <ol class="blog-posts-list">
                 <%= for post <- Enum.take(@posts, 3) do %>
                   <li>
@@ -59,7 +59,7 @@ defmodule Micaelnussbaumer.RootLayout do
                 <% end %>
               </ol>
             <% end %>
-            <img class="sidebar-logo" src="/images/graphics/circled-dot.webp" />
+            <img class="sidebar-logo" src="/images/graphics/apple-touch-icon.png" />
           </div>
         </main>
       </body>
