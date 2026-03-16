@@ -54,6 +54,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
+    cname: micaelnussbaumer.com
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
