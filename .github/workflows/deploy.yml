@@ -46,7 +46,7 @@ jobs:
       - name: Create CNAME
         run: |
           touch CNAME
-          echo "micaelnussbaumer.com"
+          echo "micaelnussbaumer.com" > CNAME
           mv CNAME ./_site/CNAME
 
       - name: Upload artifact
