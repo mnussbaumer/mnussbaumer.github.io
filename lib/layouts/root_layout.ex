@@ -62,6 +62,9 @@ defmodule Micaelnussbaumer.RootLayout do
             <img class="sidebar-logo" src="/images/graphics/apple-touch-icon.png" />
           </div>
         </main>
+        <footer>
+          <a href="/feed.xml" target="_blank">RSS</a>
+        </footer>
       </body>
 
       <%= if Mix.env() == :dev do %>

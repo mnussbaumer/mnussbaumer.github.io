@@ -172,6 +172,23 @@ main {
     max-width: calc(100% - 250px);
 }
 
+footer {
+    background-color: var(--bg-alt-color);
+    color: var(--text-highlight-color);
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    min-height: 60px;
+    border-top: 2px ridge var(--link-color);
+
+    a {
+	margin: 0 10px;
+	color: var(--text-highlight-color);
+    }
+}
+
 .pre-intro {
     font-size: 18rem;
     text-indent: 4ch;
