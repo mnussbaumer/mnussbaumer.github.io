@@ -17,8 +17,8 @@ defmodule Micaelnussbaumer.RootLayout do
           |> Enum.intersperse("|")
           |> Enum.join(" ")}
         </title>
-        <link rel="icon" href="" />
         <link rel="stylesheet" href="/css/site.css" />
+    <link rel="alternate" title="RSS Feed" type="application/rss+xml" href="/feed.xml">
         <script src="/js/site.js" />
         <link rel="icon" type="image/png" href="/images/graphics/favicon-96x96.png" sizes="96x96" />
         <link rel="icon" type="image/svg+xml" href="/images/graphics/favicon.svg" />
