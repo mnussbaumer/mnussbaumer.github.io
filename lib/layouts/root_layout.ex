@@ -18,7 +18,7 @@ defmodule Micaelnussbaumer.RootLayout do
           |> Enum.join(" ")}
         </title>
         <link rel="stylesheet" href="/css/site.css" />
-    <link rel="alternate" title="RSS Feed" type="application/rss+xml" href="/feed.xml">
+        <link rel="alternate" title="RSS Feed" type="application/rss+xml" href="/feed.xml">
         <script src="/js/site.js" />
         <link rel="icon" type="image/png" href="/images/graphics/favicon-96x96.png" sizes="96x96" />
         <link rel="icon" type="image/svg+xml" href="/images/graphics/favicon.svg" />
@@ -28,7 +28,7 @@ defmodule Micaelnussbaumer.RootLayout do
         <link rel="manifest" href="/images/graphics/site.webmanifest" />
       </head>
 
-      <body>
+      <body class={assigns[:view_type]}>
         <header>
           <ul>
             <li><a href="/pages/blog">blog</a></li>
@@ -52,10 +52,12 @@ defmodule Micaelnussbaumer.RootLayout do
               <a class="since" href="/pages/blog">blog</a>
               <ol class="blog-posts-list">
                 <%= for post <- Enum.take(@posts, 3) do %>
-                  <li>
-                    <span class="date">{Calendar.strftime(post.date, "%Y-%m-%d")}</span>
-                    <a href={post.permalink}>{post.title}</a>
-                  </li>
+                  <a href={post.permalink} alt={post.title}>
+                    <li>
+                      <span class="date">{Calendar.strftime(post.date, "%Y-%m-%d")}</span>
+                      {post.title}
+                    </li>
+                  </a>
                 <% end %>
               </ol>
             <% end %>

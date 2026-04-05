@@ -4,19 +4,14 @@ defmodule Micaelnussbaumer.AboutPage do
     permalink: "/pages/about",
     sidebar:
       {:safe,
-       ["<img src='/images/about/about-2.webp' />", "<img src='/images/about/about-1.webp' />"]}
+       ["<img src='/images/about/about-2.webp' />", "<img src='/images/about/about-1.webp' />"]},
+    view_type: :about
 
   use Phoenix.Component
 
-  def greet(assigns) do
-    ~H"""
-    <img src="/images/about/about-2.webp" />
-    <img src="/images/about/about-1.webp" />
-    """
-  end
-
   def template(assigns) do
     ~H"""
+    <img class="only-mobile about-image-mobile" src="/images/about/about-2.webp" />
     <p>
       I work mostly as a web-developer, although I graduated in Photography. I like to own the full-stack development of products, in the following order of preference: back-end systems/engines/schemas, front-end/UI/UX, DevOPs.
       I'm Portuguese but currently based in Thailand.
