@@ -18,10 +18,12 @@ defmodule Micaelnussbaumer.BlogPage do
     <hr class="hr-separator-b" />
     <ol class="blog-posts-list">
       <%= for post <- @posts do %>
-        <li>
-          <span class="date">{Calendar.strftime(post.date, "%Y-%m-%d")}</span>
-          <a href={post.permalink}>{post.title}</a>
-        </li>
+        <a href={post.permalink} alt={post.title}>
+          <li>
+            <span class="date">{Calendar.strftime(post.date, "%Y-%m-%d")}</span>
+            {post.title}
+          </li>
+        </a>
       <% end %>
     </ol>
     """
