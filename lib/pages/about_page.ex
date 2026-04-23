@@ -18,7 +18,7 @@ defmodule Micaelnussbaumer.AboutPage do
     </p>
     <br />
     <p>
-      I have experience (10++ years) with several technlogies and I prefer to write Elixir as a backend language with whatever combination of ancillary languages/software, when possible. For frontend matters I tend to use WebComponents (the native browser implementation) and plain modern Javascript with Web APIs but I have used extensively in the past frameworks such as Vue2 and React, so I am familiar with them. You cand find some libraries in my
+      I have experience (10++ years) with several technologies and I prefer to write Elixir as a backend language with whatever combination of ancillary languages/software, when possible. For frontend matters I tend to use WebComponents (the native browser implementation) and plain modern Javascript with Web APIs but I have used extensively in the past frameworks such as Vue2 and React, so I am familiar with them. You cand find some libraries in my
       <a href="https://github.com/mnussbaumer" target="_blank">github</a>
     </p>
     <br />
@@ -61,8 +61,7 @@ defmodule Micaelnussbaumer.AboutPage do
     <ol class="decorationless-list">
       <li><span class="since-b">2026</span></li>
       <li>
-        - Resumed work on a browser based TCG, nearing completion for MVP/Alpha, Aether Summon (prev. Aether Wars);
-      </li>
+        - Resumed work on a browser based TCG and launched the beta version at <a href="https://aethersummon.com" target="_blank">aethersummon.com</a>
       <li>
         - Started moving anti-rota.com to this domain and blog because besides being expensive, in the end squarespace doesn't support a bunch of google adsense/domains things (...);
       </li>
