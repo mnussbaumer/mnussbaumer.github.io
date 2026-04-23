@@ -62,6 +62,7 @@ defmodule Micaelnussbaumer.AboutPage do
       <li><span class="since-b">2026</span></li>
       <li>
         - Resumed work on a browser based TCG and launched the beta version at <a href="https://aethersummon.com" target="_blank">aethersummon.com</a>
+      </li>
       <li>
         - Started moving anti-rota.com to this domain and blog because besides being expensive, in the end squarespace doesn't support a bunch of google adsense/domains things (...);
       </li>
