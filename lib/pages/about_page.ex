@@ -2,9 +2,7 @@ defmodule Micaelnussbaumer.AboutPage do
   use Tableau.Page,
     layout: Micaelnussbaumer.RootLayout,
     permalink: "/pages/about",
-    sidebar:
-      {:safe,
-       ["<img src='/images/about/about-2.webp' />", "<img src='/images/about/about-1.webp' />"]},
+    sidebar: {:safe, ["<img src='/images/about/logo-minimal-green.webp' />"]},
     view_type: :about
 
   use Phoenix.Component

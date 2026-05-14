@@ -310,7 +310,7 @@ This is how you end like Europe, a corrupt bureocratic pigsty, infinite money fo
 
 Isn't it interesting what these pigs did with Europe? Imagine a continent with this much potential, can't even fuck to replacement rates, more than half the population addicted (between alcohol, recreational and medical drugs) and the only ones interested in settling here are whores, pigs, criminals (from petty to high-crime) and people who come from places where they live worse than pets in the West... This is what Europe has become, the second biggest consumer market in the world can't even renew themselves... You know why? Just pigs and retards like you would like to live in the world you created, and this is what you see... It's people who have invested too much and can't get out (life, house, work, etc) the politicians and civil servants that have for life positions, those who can't get out and the drugged out retards that just go through life like some fucking automaton that can't even string a logical thought from A to C even though he spent 12 years on public education, 9-to-5. Really amazing.
 
-Hope this expanded your view off the world and make you more aware of the reality in which you thread.
+Hope this expanded your view of the world and make you more aware of the reality in which you thread.
 
 
 
