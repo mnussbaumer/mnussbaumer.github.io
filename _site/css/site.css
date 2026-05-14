@@ -164,11 +164,6 @@ main {
     img:not(.sidebar-logo) {
 	max-width: 80%;
 	margin: 20px 0;
-	border: 5px double var(--highlight-color-1);
-    }
-
-    img:first-child {
-	border-radius: 50%;
     }
 }
     
