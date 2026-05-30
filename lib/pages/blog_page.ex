@@ -5,6 +5,8 @@ defmodule Micaelnussbaumer.BlogPage do
 
   use Phoenix.Component
 
+  alias Micaelnussbaumer.PostLayout
+
   def template(assigns) do
     ~H"""
     <p class="pre-intro">
@@ -20,7 +22,7 @@ defmodule Micaelnussbaumer.BlogPage do
       <%= for post <- @posts do %>
         <a href={post.permalink} alt={post.title}>
           <li>
-            <span class="date">{Calendar.strftime(post.date, "%Y-%m-%d")}</span>
+            <span class="date">{PostLayout.strftime(post.date)}</span>
             {post.title}
           </li>
         </a>
