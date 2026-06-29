@@ -1,6 +1,6 @@
 ---
 author: micael nussbaumer
-date: 2026-16-05 00:00:00 +0700
+date: 2026-06-25 01:00:00 +0700
 layout: Micaelnussbaumer.PostLayout
 title: "The Wrong Tools for the Job"
 slug: wrong-tool-for-the-job
