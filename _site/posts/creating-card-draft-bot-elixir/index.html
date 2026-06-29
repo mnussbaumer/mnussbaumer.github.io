@@ -176,7 +176,8 @@ To do that we'll learn about <code>gen_statem</code>, one of the most powerful p
 <p>This allows me to then write <code>internal(:reload)</code> instead of <code>&lbrace;:next_event, :internal, :reload&rbrace;</code>, <code>keep_all([internal(:reload), @timeout])</code>, instead of <code>&lbrace;:keep_state_and_data, [&lbrace;:next_event, :internal, :reload&rbrace;, @timeout]&rbrace;</code>. It's only for making it more readable as complex handles that return a bunch of actions become overly lengthy, so on the following code snippets you'll see them being used in places.</p>
 <p>Before diving into the bot logic and flow I'll explain what and how a draft happens - note that the original was written only for live players, the &quot;bot&quot; draft was added later and one of the amazing things of this way of writing processes (when properly thought of) is that it was a matter of adding the right handles for that version of the draft.</p>
 <p>In the game players can build collections and play drafts (called Chaos Brawls) with packs they buy. Nonetheless there's a type of gameplay, called Playground, where you don't collect scrolls, you have access to all existing scrolls, and the drafts in that mode of play, because those packs don't provide scrolls for your collections, are entirely for practicing - you are provided packs of this type on signup for free and up to 9 are refilled for free every week, allowing 3 free drafts per week - for this type of draft I wanted them to always be available to do, meaning not be dependent on having enough players (8) on-line at the same time to join a draft.</p>
-<p>To do that I had to program something that simulated a bot, in order to fill the remaining 7 spots needed for a draft. Obviously, since the draft for this game requires making conscious choices that ideally lead to a balanced pile of scrolls across some in-game dimensions, just taking scrolls at random wouldn't be the ideal. Why? Because it would increase the probability of either the human player having easier access to combinations of scrolls that usually won't be happening if playing against other human players due to their contextual value (somehow in the current meta - meta meaning the context of all scrolls and prevalent strategies being played at a given time - they're perceived as higher value and highly prized so they can steer the overall picks into their direction even when other dimensions would say to pick something else).</p>
+<p>To do that I had to program something that simulated a bot, in order to fill the remaining 7 spots needed for a draft. Obviously, since the draft for this game requires making conscious choices that ideally lead to a balanced pile of scrolls across some in-game dimensions, just taking scrolls at random wouldn't be the ideal. Why?</p>
+<p>Because it would increase the probability of the human player having easier access to combinations of scrolls that usually won't be happening if playing against other human players due to their contextual value (somehow in the current meta - meta meaning the context of all scrolls and prevalent strategies being played at a given time - they're perceived as higher value and highly prized so they can steer the overall picks into their direction even when other dimensions would say to pick something else), or harder access, the bot randomly picks choices that human players with the basic understanding of the game wouldn't do and those choices then limit the ones the human player in the bot draft can do.</p>
 <p>To solve that I had to define in more or less logical terms what a &quot;balanced&quot; codex is (final list of scrolls the user arrives at after going through the 60 draft picks), so that then I could pick some dimensions (the cost to play the scroll, its type, etc) to model a more &quot;realistic&quot; draft sequence. The most important part is that the bot funnels towards a maximum of 3 domains (the &quot;colors&quot; of the energy the scrolls require) because this leads to a balanced distribution across 8 players drafting and the available scrolls from 3 tomes (packs) per player.</p>
 <p>So the <code>domain</code> is one dimension, we'll see how we codified this a bit further down. Other dimension is the type of scroll. There's many types of scrolls, fluxes, creatures, hexes, nimble spells and conjuration spells. Fluxes don't appear in tomes (packs) so that one we can ignore. Creatures are the most important usually, since they work as guarders and strikers, meaning they protect your life total and threaten the opponent's life total, being life total the most usual way of winning, by being the one driving the opponent's life total to 0.</p>
 <p>Obviously there's a place in a final list for each type of spell. You need nimbles to allow you to interact with your opponent's spells. Some hexes and conjurations due to their usually unique effects are also welcomed. Nonetheless, ultimately we will want to skew our choices towards a much higher number of creatures spreading the remaining slots across the other types.</p>
@@ -1945,7 +1946,7 @@ or read it here, or <a href="#after-bot-draft">skip it and follow along</a> with
 </div>
 <p>I kept the logic to create a <code>valid</code> <code>draft pod</code> and loading it outside of the concerns of this article, in the app it actually takes the id and then loads it from the database, plus it stores every player pick along with the draft as it goes, this guarantees it can be always restored to at least the last pick choice before the process crashes (or the node, or the database, or the connection, etc). Here we would pass the <code>%Pod&lbrace;&rbrace;</code> in the state we want to start from. This also means it's easy to test it. We can build a <code>Pod.t()</code> schema and start a <code>Statems.Draft.Pod</code> exactly as needed to test and then interact with it, assert on the results, assert some things can't happen, etc.</p>
 <p>The init handle is specific to the <code>Pod</code> being a <code>bot draft</code>, because it expects a single <code>player_id</code> under <code>players</code>. We just reduce through a list of <code>player_id</code> plus another 7 fake ids, and create the basic initial <code>bag</code> for each player. The <code>bag</code> is where we accumulate the <code>players picks</code> and current choices, timers, etc.</p>
-<p>Because before finishing the <code>draft</code> the bags are simply a reflection of <code>picks</code> we can simply rebuild the correct state by replaying the <code>player picks</code> that we would be storing. Once the draft is finished we can just ditch the actions and store the final choices in the individual bags that are added to the player's account.</p>
+<p>Because before finishing the <code>draft</code> the bags are simply a reflection of <code>picks</code> we can simply rebuild the correct state by replaying the <code>player picks</code> that we would be storing. Once the draft is finished we can just ditch the actions (unless we want full draft replayability afterwards) and store the final choices in the individual bags that are added to the player's account.</p>
 <div class="index-anchor" id="index-statems-pod-broadcast">
   <h4>Statems.Draft.Pod Updates Broadcast</h4>
 </div>
@@ -1954,19 +1955,27 @@ or read it here, or <a href="#after-bot-draft">skip it and follow along</a> with
   <h4>Statems.Draft.Pod engine flow</h4>
 </div>
 <p><code>set_tomes</code> is what kickstarts the actual engine, it's called during initial load and then after each pick, and in case it's in the <code>:loading</code> state it then goes on to <code>apply_picks</code> and there (if any <code>picks</code> exists) brings the just loaded draft into the last correct state by replaying every pick in order, otherwise it tests the round.</p>
-<p>Since it starts in <code>:loading</code> state and we end up running <code>:apply_picks</code> (which we will always on the first time the <code>statem</code> is interacted with) and this ends up doing <code>:set_on</code>. On <code>:set_on</code> we first set the timers for all players in the draft.</p>
+<p>Since it starts in <code>:loading</code> state and we end up running <code>internal(:apply_picks)</code> (which we will always on the first time the <code>statem</code> is interacted with) this always ends up doing <code>internal(:set_on)</code>. On <code>:set_on</code> we first set the timers for all players in the draft.</p>
 <p>If we're on an already loaded draft, then it simply checks first if the list of current tomes for draft for every player is empty - if it is it means we are on the end of a pack and so we should either finish the draft if it's the last pack or open a new round of packs.</p>
 <p>Either way we set the bags as they should be accordingly and then do <code>check_if_bot_draft</code>.</p>
-<p>Before the <code>bot</code> picks lets check the <code>:set_timers</code> for <code>:all</code> players. There's a similar one that is by <code>player</code> alone and the logic is very similar. We iterate through each bag, get the round, get the current timeout, set the timeout again - because the timeouts are segregated and identified by <code>player id</code>, <code>&lbrace;:pick, player_id&rbrace;</code>, and the way <code>gen_statem</code> works, they're simply &quot;overwritten&quot; everytime we set the same named timer - can think of it as idempotency - and because they're dealt internally by the <code>statem</code> itself we know they are set in order as we return from the handles.</p>
-<p>Remember a process in Elixir has a mailbox and in case of <code>gen_statem</code>s also an internal list of actions that the writer can program through the <code>callbacks</code>, by returning the wanted actions definitions in that return value. So what happens is you have a box with data and state that you can interact with messages (perhaps, similar in API to an object), by knowing how to find or address the process - while these messages and events can be asynchronous the happen inside the <code>&quot;process&quot;</code> as a sequential list of actions.</p>
-<p>So if you return from a <code>gen_statem</code> handle running a process:</p>
+<p>Before getting into the <code>bot</code> picks lets check the <code>internal(:set_timers)</code> for <code>:all</code> players. There's a similar one that is by <code>player</code> alone and the logic is very similar but for a single bag. Here we iterate through each bag, get the round, get the current timeout, set the timeout again - because the timeouts are segregated and identified by <code>player id</code>, <code>&lbrace;:pick, player_id&rbrace;</code>, and the way <code>gen_statem</code> works, they're simply &quot;overwritten&quot; everytime we set the same named timer - can think of it as idempotency - and because they're dealt internally by the <code>statem</code> itself we know they are set in order as we return from the handles.</p>
+<p>Remember a process in Elixir has a mailbox and in case of <code>gen_statem</code>s also an internal list of actions that the writer can program through the <code>callbacks</code>, by returning the wanted actions definitions in that return value. So what happens is you have a box with data and state that you can interact with messages (perhaps, similar in API to an object), by knowing how to find or address the process - while these messages and events can be asynchronous they happen inside the <code>&quot;process&quot;</code> as a sequential list of actions, and the most common API to communicate with a process is synchronous (<code>.call</code>, built on top of the asynchronous base). This when mixed with the scheduling of the BEAM gives you cheap independent mini programs, that can be programmed in the most helpful ways, from lifecycles to surface API, that with a bit of understanding can be made to be distributed globally across nodes with many guarantees.</p>
+<p>Also a note, sometimes when talking, like of the &quot;defects&quot; of the <code>gen_server</code>, or other things in the ecosystem, it can sound blown out of proportion, and is more related to the options we have in the ecosystem - a <code>gen_server</code> is still a much better abstraction that what you'll get in 90% of the languages being regularly used, and it still makes for much more robust architectures if used correctly (and there's a common ground of work that goes back to its usage, patterns, issues, in erlang) - so when one says <code>gen_statem</code> would be a better tool for the job, it's in a <code>pedantic's</code> list inside the tools we have in elixir, if compared to a non-asynch event-loop, starting/spawning and using a <code>gen_server</code> is still night and day comparatively.</p>
+<p>Back to our code, if you return from a <code>gen_statem</code> handle running a process:</p>
 <pre class="lumis" style="color: #cdcecf; background-color: #192330;"><code class="language-elixir" translate="no" tabindex="0"><div class="line" data-line="1"><span style="color: #aeafb0;">&lbrace;</span><span style="color: #86abdc;">:keep_state_and_data</span><span style="color: #aeafb0;">,</span> <span style="color: #aeafb0;">[</span><span style="color: #aeafb0;">&lbrace;</span><span style="color: #86abdc;">:reply</span><span style="color: #aeafb0;">,</span> <span style="color: #dfdfe0;">from</span><span style="color: #aeafb0;">,</span> <span style="color: #aeafb0;">&lbrace;</span><span style="color: #86abdc;">:ok</span><span style="color: #aeafb0;">,</span> <span style="color: #86abdc;">:done</span><span style="color: #aeafb0;">&rbrace;</span><span style="color: #aeafb0;">&rbrace;</span><span style="color: #aeafb0;">,</span> <span style="color: #aeafb0;">&lbrace;</span><span style="color: #86abdc;">:next_event</span><span style="color: #aeafb0;">,</span> <span style="color: #86abdc;">:internal</span><span style="color: #aeafb0;">,</span> <span style="color: #86abdc;">:persist</span><span style="color: #aeafb0;">&rbrace;</span><span style="color: #aeafb0;">,</span> <span style="color: #aeafb0;">&lbrace;</span><span style="color: #86abdc;">:next_event</span><span style="color: #aeafb0;">,</span> <span style="color: #86abdc;">:internal</span><span style="color: #aeafb0;">,</span> <span style="color: #86abdc;">:broadcast</span><span style="color: #aeafb0;">&rbrace;</span><span style="color: #aeafb0;">]</span><span style="color: #aeafb0;">&rbrace;</span>
+</div><div class="line" data-line="2">
+</div><div class="line" data-line="3"><span style="color: #738091;">### or as I would write it with the Statems.Helpers macros</span>
+</div><div class="line" data-line="4"><span style="color: #86abdc;">keep_all</span><span style="color: #aeafb0;">(</span><span style="color: #aeafb0;">[</span>
+</div><div class="line" data-line="5">  <span style="color: #86abdc;">reply</span><span style="color: #aeafb0;">(</span><span style="color: #dfdfe0;">from</span><span style="color: #aeafb0;">,</span> <span style="color: #aeafb0;">&lbrace;</span><span style="color: #86abdc;">:ok</span><span style="color: #aeafb0;">,</span> <span style="color: #86abdc;">:done</span><span style="color: #aeafb0;">&rbrace;</span><span style="color: #aeafb0;">)</span><span style="color: #aeafb0;">,</span>
+</div><div class="line" data-line="6">  <span style="color: #86abdc;">internal</span><span style="color: #aeafb0;">(</span><span style="color: #86abdc;">:persist</span><span style="color: #aeafb0;">)</span><span style="color: #aeafb0;">,</span>
+</div><div class="line" data-line="7">  <span style="color: #86abdc;">internal</span><span style="color: #aeafb0;">(</span><span style="color: #86abdc;">:broadcast</span><span style="color: #aeafb0;">)</span>
+</div><div class="line" data-line="8"><span style="color: #aeafb0;">]</span><span style="color: #aeafb0;">)</span>
 </div></code></pre>
 <p>You kow it will first <code>reply</code> to the address (<code>from</code>) and then set an <code>:internal</code> event <code>:persist</code>, followed by another <code>:internal</code> event <code>broadcast</code>. The next events can carry any term too when we're using the <code>:handle_event_function</code> for the <code>callback_mode()</code> along with arbitrary state definitions.</p>
 <p>The only exception (if I'm not mistaken to this ordering) are <code>reply</code> actions themselves - inside a single returned list - I think those are given priority. If you want to actually only <code>&quot;reply&quot;</code> after some additional handle is ran, like after <code>:persist</code>, then instead of <code>&lbrace;:reply, from, &lbrace;:ok, :done&rbrace;&rbrace;</code> on this initial call handle, you would do something like <code>&lbrace;:next_event, :internal, &lbrace;:persist, reply_to: from&rbrace;&rbrace;</code>, and on that handle do all you need and then on the action list include the <code>&lbrace;:reply, from, whatever&rbrace;</code>.</p>
 <p>What this means is that you can make assumptions about how the process moves through its states - and you get all the nice tools to model proper state machines if or when your process requires it.</p>
 <p>Once we loaded any initial picks, turned the state into <code>:on</code>, set the timers and checked for a <code>new_round</code> we check if the draft is with bots. Again, a simple handle that when the pod only has a single <code>player_id</code> assumes it's a bot draft. When it is so we trigger the <code>bot_draft_picks</code> internal event.</p>
-<p>Here we go through all the <code>&quot;bags&quot;</code> that we have (meaning if we change the number of players for some reason - special draft, or new form of game-play - in the pod creation logic, etc, it will still work correctly herre), that are <code>keyed</code> by the player id in the pod data. Since real player IDs will be valid UUIDs and <code>bots</code> start with <code>bot_</code> we can simply filter out non-bot ids. We order them in descending order and give a higher order for the <code>bot_ids</code>.</p>
+<p>Here we go through all the <code>&quot;bags&quot;</code> that we have (meaning if we change the number of players for some reason - special draft, or new form of game-play - in the pod creation logic, etc, it will still work correctly here), that are <code>keyed</code> by the player id in the pod data. Since real player IDs will be valid UUIDs and <code>bots</code> start with <code>bot_</code> we can simply filter out non-bot ids. We order them in descending order and give a higher order for the <code>bot_ids</code>.</p>
 <p>With the <code>bot_ids</code> we reduce through them getting the tome (pack) that they should be picking from if any. If the bot has a tome to pick from we generate a pick selection action for it and add that to the action list we're accumulating - if no current tome to pick from we just continue iterating without changing the action list.</p>
 <p>In the end we simply return those actions in the list we accumulated, which will be a list of <code>&lbrace;:select, bot_id, selection_index&rbrace;</code>. How we arrive at that <code>selection_index</code> for the <code>bot_id</code> in a running draft is the purpose of our &quot;bot logic&quot; and we will dive into it right after finishing the overall logic.</p>
 <p>It's important to notice also one detail in case you haven't yet, you can see that there's two different <code>&lbrace;:select, player_id, scroll_index_in_the_tome_to_pick&rbrace;</code> handles/actions. One is the <code>:internal</code> version, that does the pick without any other check than that if it's a valid pick. Because only we can issue these <code>:internal</code> events from the inside of the running <code>gen_statem</code> we can use them to do things like forcing <code>timeout picks</code> (the player has let the clock run out), forcing bot picks, etc. On the other hand, if the pick comes through the UI, then it's also checked that it is matching the <code>preselected</code> scroll. This means a user can only pick after he pre-selects - which makes sense in the UI flow - a user clicks a scroll, it automatically becomes pre-selected, then he clicks it again and it selects it. This also allows for the timeout pick to reflect a pre-selected scroll, so they can pre-select and then think a bit more before commiting.</p>
@@ -1986,13 +1995,13 @@ or read it here, or <a href="#after-bot-draft">skip it and follow along</a> with
 <li>Cost Weight</li>
 <li>Type Weight</li>
 </ul>
-<p>The <code>domains quantity weight</code> evaluates how many domains the scroll in question has. We give higher weight to scrolls that have the least domains. Why is this important? Bevcause spells with 0 domains can be usually played by any deck optimally so they should be picked up at a higher rate because they will always (on average) fit whatever list you end up with.</p>
+<p>The <code>domains quantity weight</code> evaluates how many domains the scroll in question has. We give higher weight to scrolls that have the least domains. Why is this important? Because spells with 0 domains can be usually played by any deck optimally so they should be picked up at a higher rate because they will always (on average) fit whatever list you end up with.</p>
 <p>The weight decreases 0.5 units per domain increase up to 2 domains, beyond that it's always 1 weight. So anything with 3 or 5 domains is 1 weight and as such from that part always weighted lower to be chosen.</p>
 <p>Then we have <code>domains weight</code> itself, that takes the domains once again but calculates instead a percentage of those scrolls are part of the current choices already made. The reason is that if we have 8 scrolls, and 4 are <code>earth</code>, 2 <code>air</code> and 2 <code>fire</code>, we are closer theoretically to be playing <code>earth</code> at that point, since we have double the scrolls of that domain, so given scrolls of these or other domains we will value more for this pick with this particular weight those that match more percentage of what we already have in that domain. Again because in the end this is the pick that more likely makes sense at this time.</p>
-<p>Additionally we have the <code>cost weight</code> calculation. This is calculated using two simple units. One the <code>cost_base_weight</code> where we calculate the lenght of the cost string and simply calculate it's difference from our &quot;idealized&quot; average cost, which is 2. So the more below or above 2 the cost gets more penalized it is in the weight result - for less than 2 because usually they're less powerful so you don't want too many of those, and for more because they although more powerful by definition you also don't want to have more than the necessary to round your &quot;play curve&quot;.</p>
+<p>Additionally we have the <code>cost weight</code> calculation. This is calculated using two simple units. One the <code>cost_base_weight</code> where we calculate the lenght of the cost string and simply calculate it's difference from our &quot;idealized&quot; average cost, which is 3. So the more below or above 3 the cost gets more penalized it is in the weight result, with exception of 2 total cost, this is valued as almost the same as ideal - for less than 3 because usually they're less powerful so you don't want too many of those, and for more because they although more powerful by definition you also don't want to have more than the necessary to round your &quot;play curve&quot;. Notice that we always cast the result of the divergence from 3 to <code>abs</code> (absolute number, so it's always positive and then we multiply by <code>-1</code> so giving as a negative number. This represents a <code>distance</code> from the ideal, in this case 3</p>
 <p>The other unit is the domain weight in the cost - simply takes the cost string (e.g.: <code>BFFX</code>), strips it from aether costs that don't matter, like <code>B</code> which is blood, and paid with life points so can always be paid, and <code>X</code> that can be paid with any <code>aether</code> (ending with <code>FF</code>, <code>[:fire, :fire]</code>) and uses this to calculate a domain weight cost for this particular weight. Then sums both of these values to generate an independent weight value for this scroll.</p>
 <p>Lastly we just retrieve the type &quot;preference&quot; from the <code>context</code> we assembled earlier. With all this we sum the values for each scroll and lastly we just sort the list of picks by their weight, in a <code>descending</code> order, giving us the scroll that across the weights we set has the highest value. Notice that we can keep adding dimensions, improving them to reflect better, use machine learning once we have enough data between &quot;draft picks&quot; and &quot;game-play success&quot;, to either do automatic full drafts or reflect some other dimensions we find in the datasets.</p>
-<p>Nonetheless, this by itself guarantees that we have a baseline, each bot will attempt and in normal situations succeed in creating a final 60 scroll list with an average of +-60% creatures, +-20% nimbles, +-10% conjurations, +-10% hexes, divided across 3 domains manily (more than 90%) with perhaps a few mispicks when no other from the desired domains is available. On top of that it will also select with more preference for 2 aether total cost, a bit less for 1 and 3, a bit less for 0 and 4, and then everything else at the same point.</p>
+<p>Nonetheless, this by itself guarantees that we have a baseline, each bot will attempt and in normal situations succeed in creating a final 60 scroll list with an average of +-60% creatures, +-20% nimbles, +-10% conjurations, +-10% hexes, divided across 3 domains mainly (more than 90%) with perhaps a few mispicks when no other from the desired domains is available. On top of that it will also select with more preference for 2 aether total cost, a bit less for 1 and 3, a bit less for 0 and 4, and then everything else at the same point.</p>
 <p>All this is easy to change, add to, or remove but provides the human player a draft that won't be simply based on randomness, but actual picks by the bots in the &quot;general&quot; correct direction. Obviously since there can be, in practical terms, close to infinite combinations of abilities and effects that a scroll can have, and because these themselves would in a real world draft by humans assume different values accordingly to their synergies, combinations and functions in a draft at different points of the draft it's not perfect but should provide enough variance in a logical way.</p>
 <p>Maybe a scroll that costs 6 aether and 3 of them from a single domain, even if it is really powerful, if you open or get passed that scroll in the last pack, where you already have settled in another 3 domains strongly, won't have the same value as if you open it on the first pack, because there you still have almost the entirety of the draft to pick choices that will maximize and benefit that first pick. While if you're on the 3rd pack, if you haven't moved into that direction yet, adding a powerful scroll that requires 3 aether of a single domain you aren't using at all by then is probably not a very good pick - the power of the scroll hasn't changed, but playing it means you need to re-architect your list and perhaps you're just better off with a fairly weaker scroll that fits like a glove in your current picks.</p>
 <p>So the logic accounts a bit for that but without a proper machine learning algo can't make the best option naturally just by average coincidence, encoding all possible details that have a weight in a real situation is overly complex if by hand.</p>
@@ -2158,24 +2167,24 @@ or read it here, or <a href="#after-bot-draft">skip it and follow along</a> with
           <a class="since" href="/pages/blog">blog</a>
           <ol class="blog-posts-list">
             
+              <a href="/posts/wrong-tool-for-the-job" alt="The Wrong Tools for the Job">
+                <li>
+                  <span class="date">2026-06-25</span>
+                  The Wrong Tools for the Job
+                </li>
+              </a>
+            
+              <a href="/posts/violent-sports-non-violence-vegetarianism-and-other-things" alt="Violent Sports, Non-Violence, Vegetarianism and Other Things™">
+                <li>
+                  <span class="date">2026-06-05</span>
+                  Violent Sports, Non-Violence, Vegetarianism and Other Things™
+                </li>
+              </a>
+            
               <a href="/posts/creating-card-draft-bot-elixir" alt="Creating a Card Draft Bot in Elixir with State Machines">
                 <li>
                   <span class="date">2026-05-31</span>
                   Creating a Card Draft Bot in Elixir with State Machines
-                </li>
-              </a>
-            
-              <a href="/posts/what-is-reality" alt="What is reality?">
-                <li>
-                  <span class="date">2026-03-17</span>
-                  What is reality?
-                </li>
-              </a>
-            
-              <a href="/posts/creating-an-ecto-enum-type" alt="Creating an Ecto Enum Type">
-                <li>
-                  <span class="date">2022-01-06</span>
-                  Creating an Ecto Enum Type
                 </li>
               </a>
             
@@ -2188,6 +2197,57 @@ or read it here, or <a href="#after-bot-draft">skip it and follow along</a> with
       <a href="/feed.xml" target="_blank">RSS</a>
     </footer>
   </body>
+
+  
+    <script>
+  function log(message) {
+    if (true) {
+      console.log(`[web_dev_utils] ${message}`)
+    }
+  }
+  function connect() {
+    try {
+      window.socket = new WebSocket('ws://' + location.host + '/ws');
+
+      window.socket.onmessage = function(e) {
+        if (e.data === "reload") {
+          log("reloading!");
+          location.reload();
+        } else if (e.data === "subscribed") {
+          log("connected and subscribed!");
+        }
+      }
+
+      window.socket.onopen = () => {
+        waitForConnection(() => {
+          log("sending 'subscribe' message");
+          window.socket.send("subscribe")
+        }
+        , 300);
+      };
+
+      window.socket.onclose = () => {
+        setTimeout(() => connect(), 500);
+      };
+
+      function waitForConnection(callback, interval) {
+        log("waiting for connection!")
+        if (window.socket.readyState === 1) {
+          callback();
+        } else {
+          log("setting a timeout")
+          setTimeout(() => waitForConnection(callback, interval), interval);
+        }
+      }
+    } catch (e) {
+      log(e);
+      setTimeout(() => connect(), 500);
+    }
+  }
+
+  log("about to connect");
+  connect();
+</script>
 
   
 </html>
