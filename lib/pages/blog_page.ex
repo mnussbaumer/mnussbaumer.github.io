@@ -10,18 +10,13 @@ defmodule Micaelnussbaumer.BlogPage do
   def template(assigns) do
     ~H"""
     <p class="pre-intro">
-      My personal website and blog, where you can find some information about me and where I post articles in the form of tutorials/concept explanations and explore different ideas related mostly with computer programming.
+      The place where I post long-form articles, either tutorials/explanations or rants. 
     </p>
     <br />
-    <p>
-      It's built with <a href="https://github.com/elixir-tools/tableau" target="_blank">Tableau</a>. All articles previous to 2026 are either from the previous blog hosted at this same address, or from medium.com, dev.to, but I'm using the opportunity to bring the articles from my other profiles into the same place.
-    </p>
-    <br />
-    <hr class="hr-separator-b" />
     <ol class="blog-posts-list">
       <%= for post <- @posts do %>
-        <a href={post.permalink} alt={post.title}>
-          <li>
+        <a href={post.permalink} alt={post.title} class="blog-posts-entry">
+          <li class="blog-posts-entry-content">
             <span class="date">{PostLayout.strftime(post.date)}</span>
             {post.title}
           </li>

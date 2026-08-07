@@ -46,22 +46,17 @@ defmodule Micaelnussbaumer.RootLayout do
             {render(@inner_content)}
           </div>
           <div id="sidebar">
-            <%= if Map.get(@page, :sidebar) do %>
-              {@page.sidebar}
-            <% else %>
-              <a class="since" href="/pages/blog">blog</a>
-              <ol class="blog-posts-list">
-                <%= for post <- Enum.take(@posts, 3) do %>
-                  <a href={post.permalink} alt={post.title}>
-                    <li>
-                      <span class="date">{Calendar.strftime(post.date, "%Y-%m-%d")}</span>
-                      {post.title}
-                    </li>
-                  </a>
-                <% end %>
-              </ol>
-            <% end %>
-            <img class="sidebar-logo" src="/images/graphics/apple-touch-icon.png" />
+     <img class="sidebar-logo" src="/images/graphics/apple-touch-icon.png" />
+     <ol class="blog-posts-list">
+       <%= for post <- Enum.take(@posts, 3) do %>
+    <a href={post.permalink} alt={post.title}>
+    <li>
+      <span class="date">{Calendar.strftime(post.date, "%Y-%m-%d")}</span>
+      {post.title}
+    </li>
+    </a>
+       <% end %>
+     </ol>
           </div>
         </main>
         <footer>
