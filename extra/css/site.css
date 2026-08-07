@@ -384,7 +384,7 @@ pre.lumis {
     }
     
     li {
-        margin: 4px auto; /* Reduced */
+        margin: 4px 0;
         padding: 8px 10px; /* Reduced */
         background-color: var(--b2);
         border-radius: var(--rounded-box);
