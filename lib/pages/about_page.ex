@@ -10,15 +10,18 @@ defmodule Micaelnussbaumer.AboutPage do
     ~H"""
     <br>
     <p class="intro">
-      I'm a Portuguese web-developer graduated in Photography. While that might seem strange it also helps me have a lot of consideration for the visual, compositional and UI aspects of software. I like to own the full-stack development of products, in the following order of preference: back-end systems/engines/schemas, front-end/UI/UX, DevOPs.
+      I'm a Portuguese web-developer graduated in Photography. While that might seem strange it also helps me have a lot of consideration for the UI, visual and compositional aspects of software. I'm able to own the full-stack development of products, from conception to running in production but I can also work in specific positions within teams or where it's needed the most.
     </p>
     <br />
     <p class="intro">
-      I have experience (10++ years) with several technologies, frameworks, platforms and remote workflows - having worked remotely with people all over the world. Besides closed-source commercial work, you can find some libraries, or open-source commercial work, in my <a href="https://github.com/mnussbaumer" target="_blank">github</a>
+      I have experience (10++ years) with several technologies, frameworks, platforms and remote workflows - having worked remotely with people from and all over the world. In my <a href="https://github.com/mnussbaumer" target="_blank">github</a> you'll find some repositories, mostly personal but not only. I can discuss other projects privately.
     </p>
     <br />
     <p class="intro">
-      When saying full-stack software developer it's meant in the original sense of the word, with experience maintaining and continuously delivering value across different contexts of the product. This experience helps me use AI tools to aid me since I understand the domain problems very well for having dealt and solved them many times along with different constraints and objectives.
+      When saying full-stack software developer it's meant in the original sense of the word, with experience maintaining and continuously delivering value across different contexts of the product development cycle, from creating marketing email campaigns to automating discount coupons for administrators to manage directly, creating test suites to ensure a better continuous development of new features, sourcing, transforming and storing data for internal or product enabling features, load testing, etc.
+    </p>
+    <p>
+      This experience helps me use AI tools to aid me since I understand the domain problems very well due to having dealt and solved them many times, including with different constraints and objectives.
     </p>
     <br />
     <p class="intro">
@@ -38,6 +41,7 @@ defmodule Micaelnussbaumer.AboutPage do
       <li class="tech-item">PostgreSQL <span class="since badge">since 2016</span></li>
       <li class="tech-item">Docker/Compose/Swarm <span class="since badge">since 2025</span></li>
       <li class="tech-item">Terraform <span class="since badge">since 2025</span></li>
+      <li class="tech-item" style="text-align: right;"><span class="since badge">APIs</span>Stripe, Twilio, Sendgrid, OpenWeather, Google Maps, OAuth, OpenAPI specs, scheduled retrieval, responsible back-off, timing, api limits interactions, complex orchestration between disparate systems...</li>
       <li class="tech-item">K8s <span class="since badge">not an expert but have used in previous positions</span></li>
       <li class="tech-item">
         Several other ancillary technologies
@@ -59,17 +63,13 @@ defmodule Micaelnussbaumer.AboutPage do
       <li class="cv-item">
         - Resumed work on the Aether Summon browser based TCG and launched the beta version (in the meanwhile taken offline)
       </li>
-      <li class="cv-item">
-        - Started moving anti-rota.com to this domain and out of squarespace due to many different reasons;
-      </li>
       <li class="cv-item">- Started experimenting with AI for recursive world creation.</li>
       <br />
       <hr class="hr-separator-b" />
       <li class="cv-date">
         <span class="since-b badge-primary">2024</span>
       </li>
-      <li class="cv-item">- Founded anti-rota.com Blog and Youtube channels dedicated to traveling, digital nomad lifestyle and web-development</li>
-      <li class="cv-item">• Website www.anti-rota.com (English and Portuguese versions)</li>
+      <li class="cv-item">- Founded Anti-Rota Blog and Youtube channels dedicated to traveling, digital nomad lifestyle and web-development</li>
       <li class="cv-item">
         • Youtube Channel PT
         <a href="https://www.youtube.com/@anti-rota" target="_blank">youtube.com/@anti-rota</a>
@@ -81,7 +81,7 @@ defmodule Micaelnussbaumer.AboutPage do
       <br />
       <hr class="hr-separator-b" />
       <li class="cv-date"><span class="since-b badge-primary">May 2024 to July 2024</span></li>
-      <li class="cv-item">Vacations & OpenSource Work</li>
+      <li class="cv-item">OpenSource Work</li>
       <li class="cv-item">
         <a href="https://github.com/mnussbaumer/cssex" target="_blank">
           https://github.com/mnussbaumer/cssex
@@ -198,9 +198,7 @@ defmodule Micaelnussbaumer.AboutPage do
       <br />
       <li class="cv-item">Working remotely as professional Image Editor for diﬀerent clients around the world.</li>
       <li class="cv-item">
-        Traveled the world for about 2 years visiting over 12 countries and stayed for a while in each while working remotely. Started coding again. I had a
-        <a href="https://micaelnussbaumer.wordpress.com">old wordpress</a>
-        that I started at the time and later wrote content and photography for a shared blog (staygypsy.com) (these are very old blogs and they might not reflect any current view of mine, but since they are there I just leave it be as they're interesting fragments, to me personally).
+        Traveled the world for about 2 years visiting over 12 countries and stayed for a while in each while working remotely. Started coding again. I had a old wordpress that I started at the time and later wrote content and photography for a shared blog.
       </li>
       <br />
       <hr class="hr-separator-b" />
@@ -217,17 +215,14 @@ defmodule Micaelnussbaumer.AboutPage do
         <li>
           • Photography work for Partido Socialista political party, campaign portraits for brochures and outdoors (Ferreira do Alentejo)
         </li>
-        <li>• Video work for <a href="https://thermotelha.pt/" target="_blank">thermotelha.pt</a></li>
+        <li>• Video work for ThermoTelha, PT.</li>
         <li>• Several photography assignments for local clients and small organisations</li>
       </ul>
       <br />
       <hr class="hr-separator-b" />
       <li class="cv-date"><span class="since-b badge-primary">2013</span></li>
       <li class="cv-item">
-        Participation in the collective exhibition "Buildings & Remnants", by Fundação Cidade de Guimarães during Capital Europeia da Cultura (Guimarães European Capital of Culture) (<a
-          href="https://cargocollective.com/micaelnussbaumer/Tempo-imprime-no-espaco"
-          target="_blank"
-        >check in cargocollective.com</a>)
+        Participation in the collective exhibition "Buildings & Remnants", by Fundação Cidade de Guimarães during Capital Europeia da Cultura (Guimarães European Capital of Culture)
       </li>
       <br />
       <hr class="hr-separator-b" />
@@ -239,18 +234,14 @@ defmodule Micaelnussbaumer.AboutPage do
       <br />
       <li class="cv-item">Leonardo DaVinci Grant internship</li>
       <li class="cv-item">
-        Selected for through checkin.org.pt organisation for a Leonardo DaVinci grant, a 3 month stay in Padova, Italy doing an internship with
-        <a href="https://www.lucamasara.it/" target="_blank">lucamasara.it</a>
+        Selected for through checkin.org.pt organisation for a Leonardo DaVinci grant, a 3 month stay in Padova, Italy doing an internship with Luca Masara
       </li>
       <br />
       <hr class="hr-separator-b" />
       <li class="cv-date"><span class="since-b badge-primary">2011 to 2012</span></li>
       <li class="cv-item">Internship in «Fátima Missionária» (Missionários da Consolata PT)</li>
       <li class="cv-item">
-        Describing and Cataloguing the photographic collection of the Institute,
-        <a href="https://www.consolata.pt/centro-missionario-allamano-fatima/" target="_blank">
-          Centro Missionário Allamano, Fátima
-        </a>
+        Describing and Cataloguing the photographic collection of the Institute, Centro Missionário Allamano, Fátima
       </li>
       <br />
       <hr class="hr-separator-b" />
@@ -269,10 +260,7 @@ defmodule Micaelnussbaumer.AboutPage do
       <li class="cv-item">- Regular participation in activity organisation for the Association</li>
       <li class="cv-item">
         - <span class="since badge">16 June 2010 to 4 July 2010</span>
-        Personal Exhibition "O Registador" (<a
-          href="https://cargocollective.com/micaelnussbaumer/O-Registador"
-          target="_blank"
-        >in cargocollective.com</a>)
+        Personal Exhibition "O Registador", Centro de Artes, Tomar.
       </li>
       <br />
       <hr class="hr-separator-b" />

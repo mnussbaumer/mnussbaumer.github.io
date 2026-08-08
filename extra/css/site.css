@@ -40,7 +40,7 @@
     --n: #1b262c;       /* neutral */
     --nc: #a6adbb;      /* neutral-content */
     --b1: #121c22;      /* base-100 (background) */
-    --b2: #1b262c;      /* base-200 (surface/cards) */
+    --b2: #1b263f;      /* base-200 (surface/cards) */
     --b3: #263238;      /* base-300 (surface hover) */
     --bc: #9cb4bf;      /* base-content (text) */
 }
