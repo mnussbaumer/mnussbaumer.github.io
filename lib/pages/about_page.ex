@@ -186,6 +186,33 @@ defmodule Micaelnussbaumer.AboutPage do
       </ul>
       <br />
       <hr class="hr-separator-b" />
+      <li class="cv-date"><span class="since-b badge-primary">2016-2017</span></li>
+      <br />
+      <li class="cv-item">Dvouch - Digital Profile/Identity Platform</li>
+      <li class="cv-item">
+        <a href="https://www.indiegogo.com/en/projects/micaelnussbaumer/21st-century-profiles" target="_blank">IndieGoGO Dvouch Campaign</a>
+      </li>
+      <ul class="decorationless-list cv-sublist">
+        <li>• This project was the reason I started learning web-development</li>
+        <li>• Ruby on Rails & Jquery</li>
+    <li>• Responsive throughout all viewport sizes, a true "digital card"</li>
+        <li>• Customisable personal urls using subdomaining, wildcard SSL certificates and custom routing</li>
+    <li>• It was solo-developed while working multiple freelancer gigs and traveling the world.</li>
+      </ul>
+      <li class="cv-item">
+        You can get a much better idea by reading the <a href="https://www.indiegogo.com/en/projects/micaelnussbaumer/21st-century-profiles" target="_blank">indiegogo project page</a> itself, but basically this was a digital identity project that allowed you to create customisable personal digital profiles, import data from other platforms, such as upwork.com, freelancer.com, youtube.com, github.com, vimeo.com, amongst others, and show it in different forms in "verified" pages, portfolio sections and galleries.
+      </li>
+      <li class="cv-item">
+        It associated email uniqueness along with the external pages reference uniqueness (single upwork.com profile, etc) to prevent more than 1 profile being associated with the external reference, guaranteeing that the information you were seeing was only "connected" to that profile. The customisation included layout, custom pages, and styling, but the verified areas couldn't be tampered with and were properly identified. A contact form proxied your e-mail account to allow being contacted directly to your inbox without ever sharing your e-mail address.
+      </li>
+      <li class="cv-item">
+        The idea came directly from working with these freelancing platforms online (at the time mostly as an image editor) and having my feedback, my portfolios and profiles spread through countless networks without any kind of interoperability, everything siloed. But then how to bring it into a single place and somehow provide visitors, people with whom you shared your "digital card/profile", the assurance that when looking at your "verified" stats, they were actually real, not someone else's profile they rented, or sold, and not tampered with?
+      </li>
+      <li class="cv-item">
+        All the while allowing you, the user, to create custom sections, customise styling and layout? Why have a mediocre profile page in linkedin, equal to everyone else's when you could have a more artistic/personal taste inclined one, that people could still trust to be real? That's what dvouch (<span class="since-b">D</span>igital <span class="since-b">Vouch</span>) was set to solve. Sadly that indiegogo campaign didn't really go anywhere. I guess the fact that it wasn't vaporware, neither block-chain, or exploitable en-masse, made it uninteresting to others... Notice that the current domain is no longer under my possessin, so it's not related to this project. Check the indiegogo campaing to read a much more in-depth explanation.
+      </li>
+      <br />
+      <hr class="hr-separator-b" />
       <li class="cv-date"><span class="since-b badge-primary">2016</span></li>
       <br />
       <li class="cv-item">Several Web Development Small Scope Projects</li>
@@ -260,7 +287,7 @@ defmodule Micaelnussbaumer.AboutPage do
       <li class="cv-item">- Regular participation in activity organisation for the Association</li>
       <li class="cv-item">
         - <span class="since badge">16 June 2010 to 4 July 2010</span>
-        Personal Exhibition "O Registador", Centro de Artes, Tomar.
+        Personal Exhibition "O Registador", Centro de Arte e Imagem, Instituto Politécnico de Tomar.
       </li>
       <br />
       <hr class="hr-separator-b" />
