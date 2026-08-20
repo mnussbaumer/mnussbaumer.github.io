@@ -287,7 +287,7 @@ defmodule Micaelnussbaumer.AboutPage do
       <li class="cv-item">- Regular participation in activity organisation for the Association</li>
       <li class="cv-item">
         - <span class="since badge">16 June 2010 to 4 July 2010</span>
-        Personal Exhibition "O Registador", Centro de Arte e Image, Instituto Politécnico de Tomar.
+        Personal Exhibition "O Registador", Centro de Arte e Imagem, Instituto Politécnico de Tomar.
       </li>
       <br />
       <hr class="hr-separator-b" />
